@@ -156,6 +156,8 @@ void CGameWindow::mainLoop(void *appPointer)
 	double PCFreq = 0.0;
 	__int64 CounterStart = 0;
 	LARGE_INTEGER li;
+	int framerate = 0;
+	bool notFirstFrame = false;
 
 	if (m_Window == NULL || appPointer == NULL || m_ReferenceRenderer == NULL)
 		return;
@@ -192,8 +194,14 @@ void CGameWindow::mainLoop(void *appPointer)
 		delta_time   = current_time - last_time; // Calculate elapsed time
 		last_time    = current_time;             // Update last time to be the current time
 		accumulator += delta_time;               // 
-		while (accumulator >= dt) {              //
-			accumulator -= dt;
+		if (!notFirstFrame) {
+			accumulator = 0;
+			notFirstFrame = true;
+		}
+		while (accumulator >= (dt*62.5)) {    //
+			cout << "FPS : " << framerate << endl;
+			framerate = 0;
+			accumulator -= (dt*62.5);
 		}
 
 		/* Update */
@@ -207,6 +215,7 @@ void CGameWindow::mainLoop(void *appPointer)
 
 		/* Poll for and process events */
 		glfwPollEvents();
+		framerate++;
 	}
 
 	/* Cleanup GLFW window */
