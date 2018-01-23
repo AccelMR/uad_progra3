@@ -181,6 +181,13 @@ bool C3DModel::loadFromFile(const char * const filename)
 	return readFileOk;
 }
 
+C3DModel * C3DModel::load(const wchar_t * filename)
+{
+	C3DModel* newObject = nullptr;
+
+	return nullptr;
+}
+
 /*
 */
 bool C3DModel::readFile(const char * filename, bool countOnly)

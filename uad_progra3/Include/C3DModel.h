@@ -41,7 +41,8 @@ public:
 	~C3DModel();
 
 	bool isInitialized() const { return m_Initialized; }
-	bool loadFromFile(const char * const filename);
+	virtual bool loadFromFile(const char * const filename);
+	C3DModel* load(const wchar_t* filename);
 
 	unsigned int *getGraphicsMemoryObjectId() { return &m_graphicsMemoryObjectId; }
 	void setGraphicsMemoryObjectId(unsigned int id) { m_graphicsMemoryObjectId = id; }

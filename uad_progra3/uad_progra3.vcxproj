@@ -165,6 +165,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="C3DModel_Obj.h" />
+    <ClInclude Include="C3DModel_STL.h" />
     <ClInclude Include="Include\C3DModel.h" />
     <ClInclude Include="Include\CApp.h" />
     <ClInclude Include="Include\CAppExamenFinal.h" />
@@ -188,6 +190,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="C3DModel_Obj.cpp" />
+    <ClCompile Include="C3DModel_STL.cpp" />
     <ClCompile Include="Dependencies\GLAD\glad-4.3-core\src\glad.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
