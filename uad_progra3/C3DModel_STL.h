@@ -6,5 +6,8 @@ class C3DModel_STL :
 public:
 	C3DModel_STL();
 	~C3DModel_STL();
+
+	bool loadFromFile();
+	void reset();
 };
 
