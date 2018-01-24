@@ -46,12 +46,14 @@ C3DModel * C3DModel::load(const wchar_t * filename)
 {
 	C3DModel* newObject = nullptr;
 	//...
+	wchar_t *file_cpy = new wchar_t;
+	wcsncpy(file_cpy, (wchar_t*)filename, (int)wcslen(filename));
 
 	wchar_t* buffer;
-	wchar_t* token = wcstok_s((wchar_t*)filename, L"\\", &buffer);
+	const wchar_t* token = wcstok_s((wchar_t*)file_cpy, L".", &buffer);
 
 	while (token != nullptr) {
-		if (wcscmp(token, L"obj")){
+		if (!wcscmp(L"obj",token) == 0){
 			newObject = new C3DModel_Obj();
 
 			if (filename == nullptr) {
@@ -71,6 +73,7 @@ C3DModel * C3DModel::load(const wchar_t * filename)
 
 			newObject->loadFromFile(strTo);
 		}
+			token = wcstok_s(nullptr, L"\\", &buffer);
 	}
 
 	return nullptr;

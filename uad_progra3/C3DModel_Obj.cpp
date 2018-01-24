@@ -360,7 +360,8 @@ bool C3DModel_Obj::readFile(const char * filename, bool countOnly)
 		getline(infile, lineBuffer);
 		lineNumber++;
 
-		if (!(this->parseLine(lineBuffer, countOnly, lineNumber))) {
+		if (!(this->parseLine(lineBuffer, countOnly, lineNumber)))
+		{
 			readFileOk = false;
 			break;
 		}
