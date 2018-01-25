@@ -299,6 +299,7 @@ bool CAppParcial2::load3DModel(const char * const filename)
 	MultiByteToWideChar(CP_UTF8, 0, &filename[0], (int)strlen(filename), wstrTo, num_chars);
 	wstrTo[num_chars] = '\0';
 
+	m_p3DModel = C3DModel::load(wstrTo);
 	// Load object from file
 	bool loaded = m_p3DModel->load(wstrTo);
 
@@ -329,6 +330,7 @@ bool CAppParcial2::load3DModel(const char * const filename)
 		{
 			unloadCurrent3DModel();
 		}
+		free(wstrTo);
 	}
 	return loaded;
 }
