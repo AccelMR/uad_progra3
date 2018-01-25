@@ -3,6 +3,7 @@
 // include glad *before* glfw
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "../Include/CAppParcial2.h"
 
 #include <iostream>
 using namespace std;
@@ -162,8 +163,6 @@ void CGameWindow::mainLoop(void *appPointer)
 	__int64 CounterStart = 0;
 	int numFramesRendered = 0;
 	LARGE_INTEGER li;
-	int framerate = 0;
-	bool notFirstFrame = false;   //   Checks that is not the first frame
 
 	if (m_Window == NULL || appPointer == NULL || m_ReferenceRenderer == NULL)
 		return;
@@ -202,18 +201,6 @@ void CGameWindow::mainLoop(void *appPointer)
 		delta_time   = current_time - last_time; // Calculate elapsed time
 		last_time    = current_time;             // Update last time to be the current time
 		accumulator += delta_time; 
-		// 
-		if (!notFirstFrame) {     //  Don't know why the first time it runs accumulator is negative
-			accumulator = 0;
-			notFirstFrame = true;    // Set the flag off
-		}
-
-		/* dt*62.5 equals one sec */
-		while (accumulator >= (dt*62.5)) {    //   If accumulator is 1 sec then print FPS's and set accumulator to 0  
-			cout << "FPS : " << framerate << endl;
-			framerate = 0;
-			accumulator -= (dt*62.5);
-		}
 
 		if (delta_time > 0.0)
 		{
@@ -232,7 +219,7 @@ void CGameWindow::mainLoop(void *appPointer)
 			{
 				fps = (numFramesRendered / (one_second / 1000.0));
 				one_second -= 1000.0;
-				cout << "fps: " << fps << endl;
+				cout << "FPS: " << fps << endl;
 				numFramesRendered = 0;
 			}
 		}
@@ -245,7 +232,6 @@ void CGameWindow::mainLoop(void *appPointer)
 
 		/* Poll for and process events */
 		glfwPollEvents();
-		framerate++;
 	}
 
 	/* Cleanup GLFW window */
@@ -326,6 +312,7 @@ void CGameWindow::keyboardCallback(GLFWwindow * window, int key, int scancode, i
 			CGameWindow::requestArrowRight = true;
 			break;
 		// ARROW RIGHT, app-specific
+
 		// ENTER key executes the current menu item action
 		case GLFW_KEY_ENTER:
 			CGameWindow::requestExecuteAction = true;
@@ -471,6 +458,8 @@ void CGameWindow::processInput(void *appPointer)
 		}
 		else
 		{
+			CVector3 movement;
+
 			CGameWindow::requestExecuteAction      = false;
 			CGameWindow::requestSelectNextMenuItem = false;
 			CGameWindow::requestSelectPrevMenuItem = false;
@@ -478,19 +467,27 @@ void CGameWindow::processInput(void *appPointer)
 			// Check the arrow keys
 			if (CGameWindow::requestArrowUp)
 			{
+				movement.setValues(0, 0, -DEFAULT_MOVE_SPEED);
 				((CApp *)appPointer)->onArrowUp(CGameWindow::keyMods);
+				(*((CAppParcial2*)appPointer)->getObjectPos()) += movement;
 			}
 			if (CGameWindow::requestArrowDown)
 			{
+				movement.setValues(0, 0, DEFAULT_MOVE_SPEED);
 				((CApp *)appPointer)->onArrowDown(CGameWindow::keyMods);
+				(*((CAppParcial2*)appPointer)->getObjectPos()) += movement;
 			}
 			if (CGameWindow::requestArrowLeft)
 			{
+				movement.setValues( -DEFAULT_MOVE_SPEED,0,0 );
 				((CApp *)appPointer)->onArrowLeft(CGameWindow::keyMods);
+				(*((CAppParcial2*)appPointer)->getObjectPos()) += movement;
 			}
 			if (CGameWindow::requestArrowRight)
 			{
+				movement.setValues ( DEFAULT_MOVE_SPEED,0,0 );
 				((CApp *)appPointer)->onArrowRight(CGameWindow::keyMods);
+				(*((CAppParcial2*)appPointer)->getObjectPos()) += movement;
 			}
 		}
 	}

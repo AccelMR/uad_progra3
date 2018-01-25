@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+
 using namespace std;
 
 #include "../Include/Globals.h"
@@ -42,6 +43,12 @@ CAppParcial2::~CAppParcial2()
 	cout << "Destructor: ~CAppParcial2()" << endl;
 	unloadCurrent3DModel();
 }
+
+CVector3 * CAppParcial2::getObjectPos()
+{
+	return &m_objectPosition;
+}
+
 
 /* */
 void CAppParcial2::run()
@@ -358,6 +365,7 @@ bool CAppParcial2::load3DModel(const char * const filename)
 	
 	// Create new 3D object
 	m_p3DModel = C3DModel::load(wstrTo);
+
 	if (m_p3DModel != nullptr)
 	{
 		loaded = m_p3DModel->isInitialized();
