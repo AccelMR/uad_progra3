@@ -78,7 +78,13 @@
     <ClInclude Include="Include\CWideStringHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
+    <ClInclude Include="Include\C3DModel_Obj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\C3DModel_STL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+	</ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
@@ -123,6 +129,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Dependencies\GLAD\glad-4.3-core\src\glad.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\C3DModel_Obj.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\C3DModel_STL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,11 +1,15 @@
 #include "../stdafx.h"
 
 #include <iostream>
+#include <Windows.h>
 #include <fstream>
 #include <sstream>
-#include <string>
+#include <string.h>
 #include <vector>
 #include <algorithm>
+#include <wchar.h>
+#include "..\C3DModel_Obj.h"
+
 using namespace std;
 
 #include "../Include/C3DModel.h"
@@ -15,11 +19,8 @@ C3DModel::C3DModel()
 	: m_vertexIndices(NULL),
 	m_normalIndices(NULL),
 	m_UVindices(NULL),
-	m_vertices(NULL),
 	m_verticesRaw(NULL),
-	m_normals(NULL),
 	m_normalsRaw(NULL),
-	m_UVCoords(NULL),
 	m_uvCoordsRaw(NULL),
 	m_Initialized(false),
 	m_numVertices(0), 
@@ -40,13 +41,11 @@ C3DModel::C3DModel()
 C3DModel::~C3DModel()
 {
 	cout << "Destructor: C3DModel()" << endl;
-	reset();
 }
 
-/*
-*/
-void C3DModel::reset()
+C3DModel * C3DModel::load(const wchar_t * filename)
 {
+<<<<<<< HEAD
 	if (m_vertexIndices != NULL)
 	{
 		cout << "deleting vertex indices" << endl;
@@ -153,14 +152,21 @@ bool C3DModel::loadFromFile(const char * const filename)
 
 	// First pass is to count the number of vertices, normals, UVs, faces
 	readFileOk = readObjFile(filename, true);
+=======
+	C3DModel* newObject = nullptr;
+	//...
+	wchar_t *file_cpy = new wchar_t[wcslen(filename) + 1];
+	wcsncpy(file_cpy, (wchar_t*)filename, (int)wcslen(filename) + 1);
 
-	// Display count
-	cout << "Finished reading 3D model" << endl;
-	cout << "Vertices: " << m_numVertices << endl;
-	cout << "Normals: " << m_numNormals << endl;
-	cout << "UVCoords: " << m_numUVCoords << endl;
-	cout << "Faces: " << m_numFaces << endl;
+	wchar_t* buffer;
+	const wchar_t* token = wcstok_s((wchar_t*)file_cpy, L".", &buffer);
+>>>>>>> 1cad5568e77b7eb2eb80520e5cdf61e3a20fbbce
 
+	while (token != nullptr) {
+		if (wcscmp(L"obj",token) == 0){
+			newObject = new C3DModel_Obj();
+
+<<<<<<< HEAD
 	if (readFileOk)
 	{
 		// Check for MAX number of faces
@@ -233,14 +239,25 @@ bool C3DModel::readObjFile(const char * filename, bool countOnly)
 	string lineBuffer;
 	bool readFileOk = true;
 	int lineNumber = 0;
+=======
+			if (filename == nullptr) {
+				cout << "Error al convertir, puntero nulo." << endl;
+				return 0;
+			}
 
-	infile.open(filename);
+			// Toma el tamaño necesario para crear el arreglo de caracteres.  wcslen documentación  https://msdn.microsoft.com/en-us/library/78zh94ax.aspx?f=255&MSPPError=-2147217396
+			int size_needed = WideCharToMultiByte(CP_UTF8, 0, filename, (int)wcslen(filename), NULL, 0, NULL, NULL);
+>>>>>>> 1cad5568e77b7eb2eb80520e5cdf61e3a20fbbce
 
-	while (!infile.eof())
-	{
-		getline(infile, lineBuffer);
-		lineNumber++;
+			//Genera un string del tamaño especificado por usuario y lo llena con caracteres del alfabeto    http://www.cplusplus.com/reference/cstdlib/malloc/ 
+			//char* strTo = (char*)malloc((size_needed + 1) * sizeof(char));
+			char* strTo = new char[size_needed + 1];
 
+			// Convierte la linea de caracteres y lo almacena en la hecha previamente 
+			WideCharToMultiByte(CP_UTF8, 0, filename, (int)wcslen(filename), strTo, size_needed, NULL, NULL);
+			strTo[size_needed] = '\0';
+
+<<<<<<< HEAD
 		if (!(this->parseObjLine(lineBuffer, countOnly, lineNumber)))
 		{
 			readFileOk = false;
@@ -293,48 +310,27 @@ bool C3DModel::parseObjLine(std::string line, bool countOnly, int lineNumber)
 	{
 		parsed = true;
 	}
+=======
+			newObject->loadFromFile(strTo);
+			delete[] strTo;
+			return newObject;
+		}
+		 else if (wcscmp(L"stl", token) == 0) {
+			newObject = new C3DModel_Obj();
+>>>>>>> 1cad5568e77b7eb2eb80520e5cdf61e3a20fbbce
 
-	// If there are any tokens left
-	while (token != NULL)
-	{
-		// If first token
-		if (currentToken == 0)
-		{
-			// Vertex
-			if (0 == strcmp(token, "v"))
-			{
-				readingVertex = true;
-
-				if (countOnly)
-				{
-					m_numVertices++;
-				}
+			if (filename == nullptr) {
+				cout << "Error al convertir, puntero nulo." << endl;
+				return 0;
 			}
-			// Normal
-			else if (0 == strcmp(token, "vn"))
-			{
-				readingNormal = true;
 
-				if (countOnly)
-				{
-					m_numNormals++;
-				}
-			}
-			// Vertex texture
-			else if (0 == strcmp(token, "vt"))
-			{
-				readingUV = true;
+			// Toma el tamaño necesario para crear el arreglo de caracteres.  wcslen documentación  https://msdn.microsoft.com/en-us/library/78zh94ax.aspx?f=255&MSPPError=-2147217396
+			int size_needed = WideCharToMultiByte(CP_UTF8, 0, filename, (int)wcslen(filename), NULL, 0, NULL, NULL);
 
-				if (countOnly)
-				{
-					m_numUVCoords++;
-				}
-			}
-			// Face
-			else if (0 == strcmp(token, "f"))
-			{
-				readingFace = true;
+			//Genera un string del tamaño especificado por usuario y lo llena con caracteres del alfabeto    http://www.cplusplus.com/reference/cstdlib/malloc/ 
+			char* strTo = (char*)malloc((size_needed + 1) * sizeof(char));
 
+<<<<<<< HEAD
 				if (countOnly)
 				{
 					// Check if this line is a quad or a triangle
@@ -352,25 +348,17 @@ bool C3DModel::parseObjLine(std::string line, bool countOnly, int lineNumber)
 				}
 				unrecognizedLine = true;
 			}
+=======
+			// Convierte la linea de caracteres y lo almacena en la hecha previamente 
+			WideCharToMultiByte(CP_UTF8, 0, filename, (int)wcslen(filename), strTo, size_needed, NULL, NULL);
+			strTo[size_needed] = '\0';
+>>>>>>> 1cad5568e77b7eb2eb80520e5cdf61e3a20fbbce
 
-			// If this line has an unrecognized format
-			// OR If we're in count only mode and we processed the first token, 
-			// break to exit method and go to next line
-			if (countOnly || unrecognizedLine)
-			{
-				return true;
-			}
-		}
-		else
-		{
-			// Add token to vector
-			tokens.push_back(std::string(token));
+			newObject->loadFromFile(strTo);
+			return newObject;
 		}
 
-		// Read next token
-		token = strtok_s(NULL, delimiterToken, &nextToken);
-		currentToken++;
-
+<<<<<<< HEAD
 		// No more tokens
 		if (token == NULL)
 		{
@@ -527,4 +515,10 @@ bool C3DModel::parseObjLine(std::string line, bool countOnly, int lineNumber)
 void C3DModel::computeFaceNormals()
 {
 
+=======
+			token = wcstok_s(nullptr, L"\\", &buffer);
+	}
+	delete[] file_cpy;
+	return nullptr;
+>>>>>>> 1cad5568e77b7eb2eb80520e5cdf61e3a20fbbce
 }
