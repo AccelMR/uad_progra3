@@ -27,6 +27,10 @@
 /uad_progra3/Binaries/Intermediate
 /uad_progra3/Binaries/Intermediate/*
 # ------------------------------------------------------
+# VS15
+# ------------------------------------------------------
+/uad_progra3/.vs/*
+# ------------------------------------------------------
 # Visual Studio Intellisense *VC.db file
 # ------------------------------------------------------
 /uad_progra3/uad_progra3.VC.db

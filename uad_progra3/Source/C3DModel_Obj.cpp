@@ -17,7 +17,6 @@ C3DModel_Obj::C3DModel_Obj()
 	cout << "Contructor: 3DModel_Obj()" << endl;
 }
 
-
 C3DModel_Obj::~C3DModel_Obj()
 {
 	reset();

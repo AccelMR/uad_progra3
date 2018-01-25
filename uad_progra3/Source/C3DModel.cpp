@@ -65,14 +65,15 @@ C3DModel * C3DModel::load(const wchar_t * filename)
 			int size_needed = WideCharToMultiByte(CP_UTF8, 0, filename, (int)wcslen(filename), NULL, 0, NULL, NULL);
 
 			//Genera un string del tamaño especificado por usuario y lo llena con caracteres del alfabeto    http://www.cplusplus.com/reference/cstdlib/malloc/ 
-			char* strTo = (char*)malloc((size_needed + 1) * sizeof(char));
+			//char* strTo = (char*)malloc((size_needed + 1) * sizeof(char));
+			char* strTo = new char[size_needed + 1];
 
 			// Convierte la linea de caracteres y lo almacena en la hecha previamente 
 			WideCharToMultiByte(CP_UTF8, 0, filename, (int)wcslen(filename), strTo, size_needed, NULL, NULL);
 			strTo[size_needed] = '\0';
 
 			newObject->loadFromFile(strTo);
-			free(strTo);
+			delete[] strTo;
 			return newObject;
 		}
 		 else if (wcscmp(L"stl", token) == 0) {
@@ -94,7 +95,6 @@ C3DModel * C3DModel::load(const wchar_t * filename)
 			strTo[size_needed] = '\0';
 
 			newObject->loadFromFile(strTo);
-			free(strTo);
 			return newObject;
 		}
 

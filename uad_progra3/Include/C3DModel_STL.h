@@ -11,5 +11,8 @@ public:
 
 	bool loadFromFile();
 	void reset();
+
+	bool parseLine(std::string line, bool countOnly, int lineNumber);
+	bool readFile(const char * const filename, bool countOnly);
 };
 

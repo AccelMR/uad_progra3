@@ -280,8 +280,6 @@ bool CAppParcial2::load3DModel(const char * const filename)
 	// Unload any current 3D model
 	unloadCurrent3DModel();
 	
-	// Create new 3D object
-	m_p3DModel;
 
 
 	if (filename == nullptr) {
@@ -293,20 +291,33 @@ bool CAppParcial2::load3DModel(const char * const filename)
 	int num_chars = MultiByteToWideChar(CP_UTF8, 0, filename, (int)strlen(filename), NULL, 0);
 
 	//Genera un string del tamaño especificado por usuario y lo llena con caracteres del alfabeto    http://www.cplusplus.com/reference/cstdlib/malloc/ 
-	wchar_t* wstrTo = (wchar_t*)malloc((num_chars + 1) * sizeof(wchar_t));
+	//wchar_t* wstrTo = (wchar_t*)malloc((num_chars + 1) * sizeof(wchar_t));
+	wchar_t* wstrTo = new wchar_t[num_chars + 1];
+
 
 	// Convierte la linea de caracteres y lo almacena en la hecha previamente
 	MultiByteToWideChar(CP_UTF8, 0, &filename[0], (int)strlen(filename), wstrTo, num_chars);
 	wstrTo[num_chars] = '\0';
 
-	m_p3DModel = C3DModel::load(wstrTo);
 	// Load object from file
-	bool loaded = m_p3DModel->load(wstrTo);
+	//bool loaded = m_p3DModel->load(wstrTo);
+	bool loaded = false;
+	
+	// Create new 3D object
+	m_p3DModel = C3DModel::load(wstrTo);
+	if (m_p3DModel != nullptr)
+	{
+		loaded = m_p3DModel->isInitialized();
+	}
+	else
+	{
+		cout << "Puntero m_p3DModel diferente a null " << endl;
+	}
 
 	if (loaded)
 	{
 		// Allocate graphics memory for object
-		loaded = getOpenGLRenderer()->allocateGraphicsMemoryForObject(
+			loaded = getOpenGLRenderer()->allocateGraphicsMemoryForObject(
 			m_p3DModel->getShaderProgramId(),
 			VERTEX_SHADER_3D_OBJECTS,
 			FRAGMENT_SHADER_3D_OBJECTS,
@@ -330,8 +341,8 @@ bool CAppParcial2::load3DModel(const char * const filename)
 		{
 			unloadCurrent3DModel();
 		}
-		free(wstrTo);
 	}
+	delete [] wstrTo;
 	return loaded;
 }
 
