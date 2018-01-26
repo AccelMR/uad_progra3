@@ -9,7 +9,7 @@ public:
 	C3DModel_STL();
 	~C3DModel_STL();
 
-	bool loadFromFile();
+	bool loadFromFile(const char * const filename);
 	void reset();
 
 	bool parseLine(std::string line, bool countOnly, int lineNumber);

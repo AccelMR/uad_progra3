@@ -14,9 +14,8 @@ C3DModel_STL::~C3DModel_STL()
 {
 }
 
-bool C3DModel_STL::loadFromFile()
+bool C3DModel_STL::loadFromFile(const char * const filename)
 {
-	cout << "Sintro jeje Ola";
 	return false;
 }
 

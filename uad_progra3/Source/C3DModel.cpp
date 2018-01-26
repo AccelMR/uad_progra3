@@ -12,6 +12,7 @@
 using namespace std;
 
 #include "../Include/C3DModel.h"
+#include "../Include/C3DModel_STL.h"
 
 /* */
 C3DModel::C3DModel()
@@ -75,7 +76,7 @@ C3DModel * C3DModel::load(const wchar_t * filename)
 			return newObject;
 		}
 		else if (wcscmp(L"stl", token) == 0) {
-			newObject = new C3DModel_Obj();
+			newObject = new C3DModel_STL();
 			newObject->loadFromFile(strTo);
 			return newObject;
 		}

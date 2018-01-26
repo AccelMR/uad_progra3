@@ -219,7 +219,7 @@ void CGameWindow::mainLoop(void *appPointer)
 			{
 				fps = (numFramesRendered / (one_second / 1000.0));
 				one_second -= 1000.0;
-				cout << "FPS: " << fps << endl;
+				//cout << "FPS: " << fps << endl;
 				numFramesRendered = 0;
 			}
 		}
@@ -458,7 +458,7 @@ void CGameWindow::processInput(void *appPointer)
 		}
 		else
 		{
-			CVector3 movement;
+			
 
 			CGameWindow::requestExecuteAction      = false;
 			CGameWindow::requestSelectNextMenuItem = false;
@@ -467,27 +467,19 @@ void CGameWindow::processInput(void *appPointer)
 			// Check the arrow keys
 			if (CGameWindow::requestArrowUp)
 			{
-				movement.setValues(0, 0, -DEFAULT_MOVE_SPEED);
 				((CApp *)appPointer)->onArrowUp(CGameWindow::keyMods);
-				(*((CAppParcial2*)appPointer)->getObjectPos()) += movement;
 			}
 			if (CGameWindow::requestArrowDown)
 			{
-				movement.setValues(0, 0, DEFAULT_MOVE_SPEED);
 				((CApp *)appPointer)->onArrowDown(CGameWindow::keyMods);
-				(*((CAppParcial2*)appPointer)->getObjectPos()) += movement;
 			}
 			if (CGameWindow::requestArrowLeft)
 			{
-				movement.setValues( -DEFAULT_MOVE_SPEED,0,0 );
 				((CApp *)appPointer)->onArrowLeft(CGameWindow::keyMods);
-				(*((CAppParcial2*)appPointer)->getObjectPos()) += movement;
 			}
 			if (CGameWindow::requestArrowRight)
 			{
-				movement.setValues ( DEFAULT_MOVE_SPEED,0,0 );
 				((CApp *)appPointer)->onArrowRight(CGameWindow::keyMods);
-				(*((CAppParcial2*)appPointer)->getObjectPos()) += movement;
 			}
 		}
 	}

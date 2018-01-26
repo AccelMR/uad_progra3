@@ -44,12 +44,6 @@ CAppParcial2::~CAppParcial2()
 	unloadCurrent3DModel();
 }
 
-CVector3 * CAppParcial2::getObjectPos()
-{
-	return &m_objectPosition;
-}
-
-
 /* */
 void CAppParcial2::run()
 {
@@ -78,6 +72,26 @@ void CAppParcial2::run()
 			getGameWindow()->mainLoop(this);
 		}
 	}
+}
+
+void CAppParcial2::onArrowUp(int mods)
+{
+	m_objectPosition += m_movementUp;
+}
+
+void CAppParcial2::onArrowDown(int mods)
+{
+	m_objectPosition += m_movementDown;
+}
+
+void CAppParcial2::onArrowLeft(int mods)
+{
+	m_objectPosition += m_movementLeft;
+}
+
+void CAppParcial2::onArrowRight(int mods)
+{
+	m_objectPosition += m_movementRight;
 }
 
 /* */

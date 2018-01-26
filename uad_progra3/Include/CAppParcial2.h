@@ -16,6 +16,12 @@
 class CAppParcial2 : public CApp
 {
 private:
+
+	CVector3 m_movementUp{ 0, 0, -DEFAULT_MOVE_SPEED };
+	CVector3 m_movementDown{ 0, 0, DEFAULT_MOVE_SPEED };
+	CVector3 m_movementRight{ DEFAULT_MOVE_SPEED, 0, 0 };
+	CVector3 m_movementLeft{ -DEFAULT_MOVE_SPEED,0 , 0 };
+
 	// Pointer to an object of type C3DModel
 	C3DModel *m_p3DModel;
 
@@ -31,6 +37,11 @@ private:
 	//  Object rotation speed (degrees per second)
 	double m_rotationSpeed;
 
+	virtual void onArrowUp(int mods);
+	virtual void onArrowDown(int mods);
+	virtual void onArrowLeft(int mods);
+	virtual void onArrowRight(int mods);
+
 protected:
 	// Method to initialize the menu
 	bool initializeMenu();
@@ -40,8 +51,6 @@ public:
 	CAppParcial2();
 	CAppParcial2(int window_width, int window_height);
 	~CAppParcial2();
-
-	CVector3* getObjectPos();
 
 	// Inherited methods from CApp
 	// ---------------------------
