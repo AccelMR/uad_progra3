@@ -30,7 +30,7 @@ protected:
 
     // Methods to read a model in the .obj file format
 
-	void computeFaceNormals();                                        // If model didn't have any normals, compute face normals
+	//void computeFaceNormals();                                        // If model didn't have any normals, compute face normals
 	//bool readFile(const char * const filename, bool countOnly);       // Read object from file 
 	//bool parseLine(std::string line, bool countOnly, int lineNumber); // Parse line
 

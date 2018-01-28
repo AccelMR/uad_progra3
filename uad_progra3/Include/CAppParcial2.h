@@ -17,10 +17,10 @@ class CAppParcial2 : public CApp
 {
 private:
 
-	CVector3 m_movementUp{ 0, 0, -DEFAULT_MOVE_SPEED };
-	CVector3 m_movementDown{ 0, 0, DEFAULT_MOVE_SPEED };
-	CVector3 m_movementRight{ DEFAULT_MOVE_SPEED, 0, 0 };
-	CVector3 m_movementLeft{ -DEFAULT_MOVE_SPEED,0 , 0 };
+	CVector3 m_movementUp		{ 0, 0, -DEFAULT_MOVE_SPEED };
+	CVector3 m_movementDown		{ 0, 0, DEFAULT_MOVE_SPEED };
+	CVector3 m_movementRight	{ DEFAULT_MOVE_SPEED, 0, 0 };
+	CVector3 m_movementLeft		{ -DEFAULT_MOVE_SPEED,0 , 0 };
 
 	// Pointer to an object of type C3DModel
 	C3DModel *m_p3DModel;
