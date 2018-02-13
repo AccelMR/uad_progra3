@@ -8,7 +8,7 @@
 #include "C3DModel.h"
 #include "CVector3.h"
 
-#define DEFAULT_ROTATION_SPEED 75.0
+#define DEFAULT_ROTATION_SPEED 50.0
 #define DEFAULT_MOVE_SPEED 0.5
 
 // Class that inherits from Base class CApp

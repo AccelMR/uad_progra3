@@ -448,7 +448,7 @@ void CAppParcial2::onF2(int mods)
 	ZeroMemory(&ofn, sizeof(ofn));
 	ofn.lStructSize = sizeof(ofn);
 	ofn.hwndOwner   = NULL;
-	ofn.lpstrFilter = L"Obj Files\0*.obj\0All files\0*.*\0";
+	ofn.lpstrFilter = L"STL Files\0*.stl\0Obj Files\0*.obj\0All files\0*.*\0";
 	ofn.lpstrFile   = &wideStringBuffer[0];
 	ofn.nMaxFile    = MAX_PATH;
 	ofn.lpstrTitle  = L"Select a model file";

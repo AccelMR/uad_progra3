@@ -16,7 +16,6 @@ C3DModel_STL::C3DModel_STL()
 	cout << "Contructor: 3DModel_STL()" << endl;
 }
 
-
 C3DModel_STL::~C3DModel_STL()
 {
 	reset();
@@ -159,13 +158,13 @@ bool C3DModel_STL::readFile(const char * const filename)
 		m_numVertices = m_numFaces * 3;
 		m_numUVCoords = m_numFaces * 3;
 
-		m_vertices = new CVector3[m_numVertices];//3 -
-		m_normals = new CVector3[m_numFaces];//1 -
-		m_UVCoords = new CVector3[m_numUVCoords];//3 -
+		m_vertices = new CVector3[m_numVertices];//3 
+		m_normals = new CVector3[m_numFaces];//1 
+		m_UVCoords = new CVector3[m_numUVCoords];//3 
 
-		m_verticesRaw = new float[m_numVertices * 3]; //9 -
-		m_normalsRaw = new float[m_numFaces * 3]; //3 -
-		m_uvCoordsRaw = new float[m_numUVCoords * 3]; //9 -
+		m_verticesRaw = new float[m_numVertices * 3]; //9
+		m_normalsRaw = new float[m_numFaces * 3]; //3
+		m_uvCoordsRaw = new float[m_numUVCoords * 3]; //9
 
 		m_vertexIndices = new unsigned short[m_numFaces * 3];
 		m_normalIndices = new unsigned short[m_numFaces * 3];
@@ -175,6 +174,8 @@ bool C3DModel_STL::readFile(const char * const filename)
 		float tempGetVal[3];
 		int posToPut = 0;
 
+		// STL struct is easy. First 80 characters are header then 1 long int for num of faces
+		// Now for N-faces there's one normal, and 3 vertex.
 		for (int i = 0; i < triangles; i++) {
 
 			for (int j = 0; j < 3; j++) {
