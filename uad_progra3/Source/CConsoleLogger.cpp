@@ -6,7 +6,6 @@ CConsoleLogger::CConsoleLogger()
 {
 }
 
-
 CConsoleLogger::~CConsoleLogger()
 {
 }
@@ -17,4 +16,9 @@ CConsoleLogger * CConsoleLogger::getConsoleLogger()
 		_instance = new CConsoleLogger();
 	}
 	return _instance;
+}
+
+void CConsoleLogger::Log(const char* toPrint)
+{
+	std::cout << toPrint;
 }

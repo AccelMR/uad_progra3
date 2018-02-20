@@ -2,6 +2,9 @@
 #include "../Include/CLogger.h"
 #include <ctime>
 #include <fstream>
+#include <iostream>
+#include <string>
+#include <Windows.h>
 
 class CFileLogger :
 	public CLogger
@@ -9,7 +12,9 @@ class CFileLogger :
 private:
 	static CFileLogger* _instance;
 
-	char* getFileName();
+	std::string getFileName();
+
+	std::fstream _file;
 
 protected:
 	CFileLogger();
@@ -19,5 +24,5 @@ public:
 
 	static CFileLogger* getFileLogger();
 
-	void Log();
+	void Log(const char* toPrint);
 };

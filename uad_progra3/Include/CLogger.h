@@ -8,10 +8,10 @@ protected:
 	CLogger();
 
 public:
-	~CLogger();
+	virtual ~CLogger();
 
 	static CLogger* getLogger();
 
-	virtual void Log() = 0;
+	virtual void Log(const char* toPrint) = 0;
 
 };

@@ -17,11 +17,11 @@ CLogger::~CLogger()
 
 CLogger* CLogger::getLogger()
 {
-	if (getenv("PROGRA3_FILE_LOG") == nullptr) {
-		_instance = CConsoleLogger::getConsoleLogger();
+	if (getenv("PROGRA3_FILE_LOG")) {
+		_instance = CFileLogger::getFileLogger();
 	}
 	else {
-		_instance = CFileLogger::getFileLogger();
+		_instance = CConsoleLogger::getConsoleLogger();
 	}
 	return _instance;
 }

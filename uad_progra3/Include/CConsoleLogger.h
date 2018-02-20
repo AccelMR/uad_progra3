@@ -1,6 +1,8 @@
 #pragma once
 #include "../Include/CLogger.h"
 
+#include <iostream>
+
 class CConsoleLogger :
 	public CLogger
 {
@@ -15,5 +17,5 @@ public:
 
 	static CConsoleLogger* getConsoleLogger();
 
-	void Log();
+	void Log(const char* toPrint);
 };
