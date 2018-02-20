@@ -2,14 +2,16 @@
 class CLogger
 {
 private:
-	CLogger();
 	static CLogger* _instance;
+
+protected:
+	CLogger();
 
 public:
 	~CLogger();
 
 	static CLogger* getLogger();
 
-};
+	virtual void Log() = 0;
 
-CLogger* CLogger::_instance = nullptr;
+};
