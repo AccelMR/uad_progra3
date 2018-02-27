@@ -19,6 +19,9 @@ CApp::CApp()
 	// Create CGameMenu Object
 	// Menu will be initialized later (menu items added)
 	m_Menu = new CGameMenu();
+
+	//Create Camera Objetc
+	m_myCamera = new CCamera();
 }
 
 /* */
@@ -35,6 +38,9 @@ CApp::CApp(int window_width, int window_height)
 	// Create CGameMenu Object
 	// Menu will be initialized later (menu items added)
 	m_Menu = new CGameMenu();
+
+	//Create Camera Objetc
+	m_myCamera = new CCamera();
 }
 
 /* */

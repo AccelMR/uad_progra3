@@ -94,6 +94,19 @@ void CAppParcial2::onArrowRight(int mods)
 	m_objectPosition += m_movementRight;
 }
 
+void CAppParcial2::onMouseMove(float deltaX, float deltaY)
+{
+	if (deltaX < 100.0f && deltaY < 100.0f)
+	{
+		float values[3];
+		m_objectPosition.getValues(values);
+		values[0] -= deltaX * DEFAULT_MOVE_SPEED;
+		values[2] -= deltaY * DEFAULT_MOVE_SPEED;
+		m_objectPosition.setValues(values);
+
+	}
+}
+
 /* */
 bool CAppParcial2::initializeMenu()
 {
@@ -289,9 +302,7 @@ void CAppParcial2::update(double deltaTime)
 void CAppParcial2::render()
 {
 	CGameMenu *menu = getMenu();
-	CVector3 objPos2;
-	objPos2.setValues(m_objectPosition.getX() + 2.5f, m_objectPosition.getY(), m_objectPosition.getZ());
-
+	
 	// If menu is active, render menu
 	if (menu != NULL && menu->isInitialized() && menu->isActive())
 	{

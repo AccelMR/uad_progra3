@@ -1,6 +1,6 @@
 #include "../Include/CConsoleLogger.h"
 
-CConsoleLogger* CConsoleLogger::_instance = nullptr;
+CConsoleLogger* CConsoleLogger::_instance = 0;
 
 CConsoleLogger::CConsoleLogger()
 {

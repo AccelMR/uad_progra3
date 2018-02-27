@@ -27,6 +27,8 @@ private:
 	GLFWwindow * m_Window;                 // Pointer to GLFW window
 	string       m_WindowTitle;            // Title 
 
+	static CVector3 lastMousePos;
+	static CVector3 cursorMovement;
 	                                       // Generic variables for F1..F12 keys, CApp derived class decides what to do for F2..F11
 	static bool requestF1;                 // F1 always toggles the menu on/off
 	static bool requestF2;                 // 
@@ -40,6 +42,8 @@ private:
 	static bool requestF10;                //
 	static bool requestF11;                //
 	static bool requestF12;                // F12 always exits the application
+
+	static bool requestMouseMove;
 
 	                                       // Specific keys for the actions of the menu
 	static bool requestExecuteAction;      // Enter
@@ -64,7 +68,8 @@ private:
 	static void resizeCallback(GLFWwindow * window, int width, int height);
 	// This callback will be called by GLFW when a physical key is pressed in the keyboard
 	static void keyboardCallback(GLFWwindow * window, int key, int scancode, int action, int mods);
-
+	//
+	static void mouseCallback(GLFWwindow* window, double xpos, double ypos);
 	// Process user input (keyboard, mouse)
 	void processInput(void *appPointer);
 

@@ -6,6 +6,7 @@
 #include "CGameWindow.h"
 #include "CGameMenu.h"
 #include "COpenGLRenderer.h"
+#include "..\Include\CCamera.h"
 
 #define KEY_MOD_SHIFT     0x0001
 #define KEY_MOD_CONTROL   0x0002
@@ -22,14 +23,16 @@ private:
 	CGameWindow     *m_Window;         // Pointer to our CGameWindow object
 	CGameMenu       *m_Menu;           // Pointer to our CMenu object
 	COpenGLRenderer *m_OpenGLRenderer; // Pointer to our OpenGL renderer object
+	CCamera			*m_myCamera;	   // Pointer to our Camera
 	bool m_Paused;                     // Is the app paused?  (i,e: window minimized)
 
 	bool isWindowInitialized() const;  // Is the CGameWindow object initialized ?
-	
+
 protected:
 	CGameWindow     * const getGameWindow()     const { return m_Window; }
 	CGameMenu       * const getMenu()           const { return m_Menu; }
 	COpenGLRenderer * const getOpenGLRenderer() const { return m_OpenGLRenderer; }
+	CCamera			* const getCamera()			const { return m_myCamera; }
 
 public:
 	// Constructors and VIRTUAL destructor
@@ -58,6 +61,8 @@ public:
 	virtual void onF9(int mods)  {}                       // F9
 	virtual void onF10(int mods) {}                       // F10
 	virtual void onF11(int mods) {}                       // F11
+	
+	virtual void onMouseMove(float deltaX, float deltaY) {}	  // Mouse
 
 	virtual void onArrowUp(int mods) {}
 	virtual void onArrowDown(int mods) {}

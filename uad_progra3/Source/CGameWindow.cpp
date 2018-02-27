@@ -24,6 +24,7 @@ bool CGameWindow::requestF9                 = false;
 bool CGameWindow::requestF10                = false;
 bool CGameWindow::requestF11                = false;
 bool CGameWindow::requestF12                = false;
+bool CGameWindow::requestMouseMove			= false;
 
 bool CGameWindow::requestExecuteAction      = false;
 bool CGameWindow::requestSelectNextMenuItem = false;
@@ -36,6 +37,9 @@ int  CGameWindow::keyMods                   = 0;
 
 int  CGameWindow::newWidth                  = 0;
 int  CGameWindow::newHeight                 = 0;
+
+CVector3 CGameWindow::lastMousePos = { 0,0,0 };
+CVector3 CGameWindow::cursorMovement = { 0,0,0 };
 
 /* Default constructor
 */
@@ -135,11 +139,27 @@ bool CGameWindow::create(const char *windowTitle)
 	cout << "OpenGL version: " << m_ReferenceRenderer->getOpenGLString(GL_VERSION) << endl; // GLVersion.major, GLVersion.minor
 	cout << "GLSL version: "   << m_ReferenceRenderer->getOpenGLString(GL_SHADING_LANGUAGE_VERSION) << endl;
 
+	const GLFWvidmode* view = glfwGetVideoMode(glfwGetPrimaryMonitor());
+
 	/* Capture ESC key */
 	glfwSetInputMode(m_Window, GLFW_STICKY_KEYS, GL_TRUE);
 
 	/* Keyboard callback */
 	glfwSetKeyCallback(m_Window, keyboardCallback);
+
+	/* Mouse kolvac*/
+	glfwSetCursorPosCallback(m_Window, mouseCallback);
+
+	/**/
+	glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+	/* Set window to pos */
+	glfwSetWindowPos(m_Window, 10, (view->height - m_Height) / 2);
+
+	HWND consoleWindow = GetConsoleWindow();
+	RECT r;
+	GetWindowRect(consoleWindow, &r);
+	SetWindowPos(consoleWindow, 0, 10+m_Width+10, (view->height - m_Height)/2, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 
 	return true;
 }
@@ -153,6 +173,10 @@ bool CGameWindow::create(const char *windowTitle)
 */
 void CGameWindow::mainLoop(void *appPointer)
 {
+	// Get mouse stuff
+	double currMouseX;
+	double currMouseY;
+
 	// Variables for time-based animation
 	double last_time = 0;
 	double dt = 1000 / 60;  // constant dt step of 1 frame every 60 seconds
@@ -232,6 +256,21 @@ void CGameWindow::mainLoop(void *appPointer)
 
 		/* Poll for and process events */
 		glfwPollEvents();
+
+		/**/
+		//glfwGetCursorPos(m_Window, &currMouseX, &currMouseY);
+
+		/*deltaX = currMouseX - lastMouseX;
+		deltaY = currMouseY - lastMouseY;*/
+
+		//glfwGetCursorPos(m_Window, &currMouseX, &currMouseY);
+		//mouseCallback(m_Window, currMouseX, currMouseY);
+
+		/*if (deltaX != 0.0f && deltaY != 0.0f) {
+			lastMouseX = currMouseX;
+			lastMouseY = currMouseY;
+			((CApp*)appPointer)->onMouseMove(deltaX, deltaY);
+		}*/
 	}
 
 	/* Cleanup GLFW window */
@@ -340,6 +379,20 @@ void CGameWindow::keyboardCallback(GLFWwindow * window, int key, int scancode, i
 			break;
 		}
 	}
+}
+
+void CGameWindow::mouseCallback(GLFWwindow * window, double xpos, double ypos)
+{
+	if (xpos != 0 && ypos != 0)
+	{
+		CGameWindow::requestMouseMove = true;
+
+		auto last = CGameWindow::lastMousePos;
+		CVector3 nPos(xpos, ypos, 0);
+		CGameWindow::cursorMovement = nPos - last;
+		CGameWindow::lastMousePos = nPos;
+	}
+	else CGameWindow::requestMouseMove = false;
 }
 
 /*
@@ -480,6 +533,12 @@ void CGameWindow::processInput(void *appPointer)
 			if (CGameWindow::requestArrowRight)
 			{
 				((CApp *)appPointer)->onArrowRight(CGameWindow::keyMods);
+			}
+
+			if (CGameWindow::requestMouseMove) 
+			{
+				((CApp *)appPointer)->onMouseMove(CGameWindow::cursorMovement.getX(),
+					CGameWindow::cursorMovement.getY());
 			}
 		}
 	}

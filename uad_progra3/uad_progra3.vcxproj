@@ -170,8 +170,10 @@
     <ClInclude Include="Include\C3DModel_STL.h" />
     <ClInclude Include="Include\CApp.h" />
     <ClInclude Include="Include\CAppParcial2.h" />
+    <ClInclude Include="Include\CAppProyectoP3.h" />
     <ClInclude Include="Include\CBinaryTree.h" />
     <ClInclude Include="Include\CBinaryTreeNode.h" />
+    <ClInclude Include="Include\CCamera.h" />
     <ClInclude Include="Include\CCircularDoubleLinkedList.h" />
     <ClInclude Include="Include\CCircularDoubleLinkedListNode.h" />
     <ClInclude Include="Include\CColor.h" />
@@ -203,6 +205,8 @@
     <ClCompile Include="Source\C3DModel_STL.cpp" />
     <ClCompile Include="Source\CApp.cpp" />
     <ClCompile Include="Source\CAppParcial2.cpp" />
+    <ClCompile Include="Source\CAppProyectoP3.cpp" />
+    <ClCompile Include="Source\CCamera.cpp" />
     <ClCompile Include="Source\CCircularDoubleLinkedList.cpp" />
     <ClCompile Include="Source\CCircularDoubleLinkedListNode.cpp" />
     <ClCompile Include="Source\CConsoleLogger.cpp" />

@@ -57,6 +57,28 @@ CVector3::~CVector3()
 
 /*
 */
+CVector3 CVector3::cross(const CVector3 & other)
+{
+	CVector3 res;
+	res.setValues(
+		this->getY()*other.getZ() - this->getZ()*other.getY(),
+		this->getZ()*other.getX() - this->getX()*other.getZ(),
+		this->getX()*other.getY() - this->getY()*other.getX()
+	);
+	return res;
+}
+
+CVector3 CVector3::operator-(const CVector3 & other)
+{
+	CVector3 res;
+	res.setValues(
+		this->getX() - other.getX(),
+		this->getY() - other.getY(),
+		this->getZ() - other.getZ()
+	);
+	return res;
+}
+
 void CVector3::setValues(float _x, float _y, float _z)
 {
 	m_X = _x;
