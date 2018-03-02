@@ -13,6 +13,7 @@ using namespace std;
 
 #include "../Include/C3DModel.h"
 #include "../Include/C3DModel_STL.h"
+#include "../Include/CLogger.h"
 
 /* */
 C3DModel::C3DModel()
@@ -34,13 +35,13 @@ C3DModel::C3DModel()
 	m_graphicsMemoryObjectId(0),
 	m_shaderProgramId(0)
 {
-	cout << "Constructor: C3DModel()" << endl;
+	Log << "Constructor: C3DModel()" << endl;
 }
 
 /* */
 C3DModel::~C3DModel()
 {
-	cout << "Destructor: C3DModel()" << endl;
+	Log << "Destructor: C3DModel()" << endl;
 }
 
 C3DModel * C3DModel::load(const wchar_t * filename)
@@ -51,7 +52,7 @@ C3DModel * C3DModel::load(const wchar_t * filename)
 	wcsncpy(file_cpy, (wchar_t*)filename, (int)wcslen(filename) + 1);
 
 	if (filename == nullptr) {
-		cout << "Error al convertir, puntero nulo." << endl;
+		Log << "Error al convertir, puntero nulo." << endl;
 		return 0;
 	}
 

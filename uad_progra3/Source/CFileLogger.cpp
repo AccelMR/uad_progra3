@@ -6,6 +6,7 @@ CFileLogger::CFileLogger()
 {
 	std::string fileName = getFileName();
 	std::string dir;
+	_ost = &_file;
 
 	if (getenv("PROGRA_TEMP"))
 		dir = getenv("PROGRA_TEMP");
@@ -14,7 +15,7 @@ CFileLogger::CFileLogger()
 	else throw new std::runtime_error ("Ninguna variable de ambiente encontrada ");
 	dir += "\\";
 	dir += fileName;
-	std::cout << dir << std::endl;
+	//std::cout << dir << std::endl;
 	_file.open(dir, std::ios::out);
 	_file << fileName;
 }
@@ -68,8 +69,9 @@ CFileLogger * CFileLogger::getFileLogger()
 	return _instance;
 }
 
+/*
 void CFileLogger::Log(const char* toPrint)
 {
 	_file << "\n" << toPrint;
 }
-
+*/

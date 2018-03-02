@@ -268,10 +268,10 @@ bool COpenGLRenderer::allocateGraphicsMemoryForObject(
 			|| normalPosAttribLocation < 0
 			|| uvPosAttribLocation < 0)
 		{
-			cout << "Unable to get shader program attribute locations" << endl;
-			cout << "vertexPosAttribLocation: " << vertexPosAttribLocation << endl;
-			cout << "normalPosAttribLocation: " << normalPosAttribLocation << endl;
-			cout << "uvPosAttribLocation: " << uvPosAttribLocation << endl;
+			Log << "Unable to get shader program attribute locations" << endl;
+			Log << "vertexPosAttribLocation: " << vertexPosAttribLocation << endl;
+			Log << "normalPosAttribLocation: " << normalPosAttribLocation << endl;
+			Log << "uvPosAttribLocation: " << uvPosAttribLocation << endl;
 			glUseProgram(0);
 			return false;
 		}
@@ -287,11 +287,11 @@ bool COpenGLRenderer::allocateGraphicsMemoryForObject(
 			|| sh_ProjUniformLocation < 0
 			|| sh_colorUniformLocation < 0)
 		{
-			cout << "Unable to get shader program uniform locations" << endl;
-			cout << "sh_ModelUniformLocation: " << sh_ModelUniformLocation << endl;
-			cout << "sh_ViewUniformLocation: " << sh_ViewUniformLocation << endl;
-			cout << "sh_ProjUniformLocation: " << sh_ProjUniformLocation << endl;
-			cout << "sh_colorUniformLocation: " << sh_colorUniformLocation << endl;
+			Log << "Unable to get shader program uniform locations" << endl;
+			Log << "sh_ModelUniformLocation: " << sh_ModelUniformLocation << endl;
+			Log << "sh_ViewUniformLocation: " << sh_ViewUniformLocation << endl;
+			Log << "sh_ProjUniformLocation: " << sh_ProjUniformLocation << endl;
+			Log << "sh_colorUniformLocation: " << sh_colorUniformLocation << endl;
 			glUseProgram(0);
 			return false;
 		}
@@ -453,7 +453,7 @@ bool COpenGLRenderer::generateRenderGeometry(
 		|| UVcoords == NULL
 		)
 	{
-		cout << "COpenGLRenderer::generateRenderGeometry() : Invalid pointers" << endl;
+		Log << "COpenGLRenderer::generateRenderGeometry() : Invalid pointers" << endl;
 		return false;
 	}
 
@@ -484,7 +484,7 @@ bool COpenGLRenderer::generateRenderGeometry(
 			|| ((vIndices[1] * 3) + 2) >= (numVertices * 3)
 			|| ((vIndices[2] * 3) + 2) >= (numVertices * 3))
 		{
-			cout << "COpenGLRenderer::generateRenderGeometry() : Invalid vertex indices" << endl;
+			Log << "COpenGLRenderer::generateRenderGeometry() : Invalid vertex indices" << endl;
 			return false;
 		}
 
@@ -492,7 +492,7 @@ bool COpenGLRenderer::generateRenderGeometry(
 			|| ((nIndices[1] * 3) + 2) >= (numNormals * 3)
 			|| ((nIndices[2] * 3) + 2) >= (numNormals * 3))
 		{
-			cout << "COpenGLRenderer::generateRenderGeometry() : Invalid normal indices" << endl;
+			Log << "COpenGLRenderer::generateRenderGeometry() : Invalid normal indices" << endl;
 			return false;
 		}
 
@@ -500,7 +500,7 @@ bool COpenGLRenderer::generateRenderGeometry(
 			|| ((uIndices[1] * 2) + 1) >= (numUVCoords * 2)
 			|| ((uIndices[2] * 2) + 1) >= (numUVCoords * 2))
 		{
-			cout << "COpenGLRenderer::generateRenderGeometry() : Invalid UV coord indices" << endl;
+			Log << "COpenGLRenderer::generateRenderGeometry() : Invalid UV coord indices" << endl;
 			return false;
 		}
 
@@ -726,9 +726,9 @@ void COpenGLRenderer::initializeTestObjects()
 	if (!CWideStringHelper::GetResourceFullPath(VERTEX_SHADER_TEST_OBJECT,   wresourceFilenameVS, resourceFilenameVS) ||
 		!CWideStringHelper::GetResourceFullPath(FRAGMENT_SHADER_TEST_OBJECT, wresourceFilenameFS, resourceFilenameFS))
 	{
-		cout << "ERROR: Unable to find one or more resources: " << endl;
-		cout << "  " << VERTEX_SHADER_TEST_OBJECT << endl;
-		cout << "  " << FRAGMENT_SHADER_TEST_OBJECT << endl;
+		Log << "ERROR: Unable to find one or more resources: " << endl;
+		Log << "  " << VERTEX_SHADER_TEST_OBJECT << endl;
+		Log << "  " << FRAGMENT_SHADER_TEST_OBJECT << endl;
 		return;
 	}
 

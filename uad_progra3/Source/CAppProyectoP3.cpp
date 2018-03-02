@@ -4,6 +4,7 @@
 
 CAppProyectoP3::CAppProyectoP3()
 {
+	Log << "CAppProyecto3" << endl;
 }
 
 

@@ -17,5 +17,5 @@ public:
 
 	static CConsoleLogger* getConsoleLogger();
 
-	void Log(const char* toPrint);
+	//void Log(const char* toPrint);
 };

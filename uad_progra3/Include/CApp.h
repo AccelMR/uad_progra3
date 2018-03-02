@@ -6,7 +6,9 @@
 #include "CGameWindow.h"
 #include "CGameMenu.h"
 #include "COpenGLRenderer.h"
+#include "..\Include\CLogger.h"
 #include "..\Include\CCamera.h"
+#include <VersionHelpers.h>
 
 #define KEY_MOD_SHIFT     0x0001
 #define KEY_MOD_CONTROL   0x0002

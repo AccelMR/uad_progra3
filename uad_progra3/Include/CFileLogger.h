@@ -13,7 +13,6 @@ private:
 	static CFileLogger* _instance;
 
 	std::string getFileName();
-
 	std::fstream _file;
 
 protected:
@@ -24,5 +23,5 @@ public:
 
 	static CFileLogger* getFileLogger();
 
-	void Log(const char* toPrint);
+	//void Log(const char* toPrint);
 };

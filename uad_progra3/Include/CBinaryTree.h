@@ -55,14 +55,14 @@ template <class T >
 CBinaryTree<T>::CBinaryTree() :
 	m_rootNode{NULL}
 {
-	cout << "CBinaryTree() Constructor" << endl;
+	Log << "CBinaryTree() Constructor" << endl;
 }
 
 /* */
 template <class T> 
 CBinaryTree<T>::~CBinaryTree()
 {
-	cout << "CBinaryTree() Destructor" << endl;
+	Log << "CBinaryTree() Destructor" << endl;
 	clearTree();
 }
 

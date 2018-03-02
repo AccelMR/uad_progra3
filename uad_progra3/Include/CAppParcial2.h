@@ -74,6 +74,7 @@ public:
 	// This derived class only uses F2/F3
 	void onF2(int mods);
 	void onF3(int mods);
+	void onF5(int mods);
 	
 private:
 

@@ -11,8 +11,6 @@ using namespace std;
 #include "Include/CAppParcial2.h"
 #include "Include/CLogger.h"
 
-#define COUT CLogger::getLogger()->Log
-
 int main()
 {
 	
