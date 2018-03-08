@@ -99,6 +99,12 @@
     <ClInclude Include="Include\CCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Include\CHexGridCell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CHexGrid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -165,6 +171,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\CCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CHexGridCell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\CHexGrid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
