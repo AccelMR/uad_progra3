@@ -18,5 +18,5 @@ public:
 
 private:
 
-	CHexGridCell *m_hexLayout [100][100];
+	CHexGridCell *m_hexLayout [3][3];
 };
