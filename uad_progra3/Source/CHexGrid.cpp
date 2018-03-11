@@ -19,7 +19,7 @@ void CHexGrid::Inicialize()
 			}
 
 			else if (i % 2 == 0) {
-				if (j == 0) { m_hexLayout[i][j] = new CHexGridCell(i + .5, j);+ }
+				if (j == 0) { m_hexLayout[i][j] = new CHexGridCell(i + .5, j); }
 				m_hexLayout[i][j] = new CHexGridCell(i + .5, j + 1);
 			}
 
