@@ -1,4 +1,4 @@
-#include "CHexGrid.h"
+#include "..\Include\CHexGrid.h"
 
 CHexGrid::CHexGrid()
 {
@@ -8,7 +8,7 @@ CHexGrid::~CHexGrid()
 {
 }
 
-void CHexGrid::Inicialize()
+bool CHexGrid::Inicialize()
 {
 	for (int i  = 0; i  < 2; i++) {
 		for (int j = 0; j < 2; j++) {
@@ -29,4 +29,5 @@ void CHexGrid::Inicialize()
 			}
 		}
 	}
+	return true;
 }

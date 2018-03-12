@@ -176,7 +176,7 @@
     <ClCompile Include="Source\CHexGridCell.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Include\CHexGrid.cpp">
+    <ClCompile Include="Source\CHexGrid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

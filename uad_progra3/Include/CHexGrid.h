@@ -14,7 +14,7 @@ public:
 	CHexGrid();
 	~CHexGrid();
 
-	void Inicialize();
+	bool Inicialize();
 
 private:
 
