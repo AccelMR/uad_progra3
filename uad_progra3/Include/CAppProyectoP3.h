@@ -4,12 +4,13 @@
 #include "..\Include\CCamera.h"
 #include "Globals.h"
 #include "..\Include\C3DModel.h"
+#include "..\Include\CWorld.h"
 #include <Windows.h>
 
 class CAppProyectoP3 : public CApp
 {
 private:
-	//CWorld myWorld;
+	CWorld *myWorld;
 
 	// Current delta time (time of the current frame - time of the last frame)
 	//double m_currentDeltaTime;
@@ -30,11 +31,11 @@ public:
 	CAppProyectoP3();
 	~CAppProyectoP3();
 
-	virtual void onMouse(float deltaX, float deltaY);
+	 void onMouse(float deltaX, float deltaY);
 
-	virtual void update(double delta_time);
-	virtual void run();
-	virtual void render();
-	virtual bool initializeMenu();
+	 void update(double delta_time);
+	 void run();
+	 void render();
+	 bool initializeMenu();
 };
 

@@ -44,9 +44,9 @@ private:
 
 	float m_cameraDistance; // Distance from camera view point to target point, expressed in OpenGL units
 
-							// TEST OBJECT VARS
-							// When no 3D object is loaded, we display a test object (spinning cube)
-							// ===========================
+	// TEST OBJECT VARS
+	// When no 3D object is loaded, we display a test object (spinning cube)
+	// ===========================
 	GLint sh_TestPositionAttribLocation;
 	GLint sh_TestColorAttribLocation;
 
@@ -73,8 +73,8 @@ private:
 		GLfloat *UVcoords, int numUVCoords,
 		int numIndicesVert,
 		unsigned short *indicesVertices,
-		unsigned short *indicesNormals,
-		unsigned short *indicesUVCoords,
+		unsigned short *indicesNormals, 
+		unsigned short *indicesUVCoords, 
 		GLfloat *finalVertices,
 		GLfloat *finalNormals,
 		GLfloat *finalUVCoords,
@@ -109,9 +109,9 @@ public:
 	// =================================================================
 	bool allocateGraphicsMemoryForObject(
 		unsigned int *shaderProgramId,
-		const char *vertexShader,
+		const char *vertexShader, 
 		const char *fragmentShader,
-		unsigned int *vertexArrayObjectID,
+		unsigned int *vertexArrayObjectID, 
 		GLfloat *vertices, int numVertices,
 		GLfloat *normals, int numNormals,
 		GLfloat *UVcoords, int numUVCoords,
@@ -132,7 +132,7 @@ public:
 	// Free graphics memory for a given 3D object 
 	// =================================================================
 	bool freeGraphicsMemoryForObject(
-		unsigned int *shaderProgramId,
+		unsigned int *shaderProgramId, 
 		unsigned int *vertexArrayObjectID);
 
 	// =================================================================
@@ -151,8 +151,8 @@ public:
 
 	//
 	bool createShaderProgram(
-		unsigned int *shaderProgramId,
-		const char *vertexShader,
+		unsigned int *shaderProgramId, 
+		const char *vertexShader, 
 		const char *fragmentShader);
 
 	//
@@ -160,9 +160,9 @@ public:
 
 	//
 	bool createTextureObject(
-		unsigned int *textureObjectId,
+		unsigned int *textureObjectId, 
 		unsigned char *textureData,
-		int width,
+		int width, 
 		int height);
 
 	// 
@@ -185,10 +185,10 @@ public:
 
 	//
 	bool renderMenuItem(
-		unsigned int *shaderProgramId,
+		unsigned int *shaderProgramId, 
 		unsigned int *textureObjectId,
 		unsigned int *vertexArrayObjectId,
-		int *colorUniformLocation,
+		int *colorUniformLocation, 
 		int *textureUniformLocation,
 		GLfloat *menuItemColor);
 
