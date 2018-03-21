@@ -29,9 +29,13 @@ private:
 
 public:
 	CAppProyectoP3();
+	CAppProyectoP3(int window_width, int window_height);
 	~CAppProyectoP3();
 
 	 void onMouse(float deltaX, float deltaY);
+	 void onF3(int mods);
+
+	 void moveCamera(float direction);
 
 	 void update(double delta_time);
 	 void run();

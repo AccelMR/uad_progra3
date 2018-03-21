@@ -17,7 +17,7 @@ CFileLogger::CFileLogger()
 	dir += fileName;
 	//std::cout << dir << std::endl;
 	_file.open(dir, std::ios::out);
-	_file << fileName;
+	_file << fileName << std::endl;
 }
 
 CFileLogger::~CFileLogger()

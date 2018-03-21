@@ -1,4 +1,4 @@
-#include "..\Include\CAppProyectoP3.h"
+#include "../Include/CAppProyectoP3.h"
 #include "../Include/Globals.h"
 #include "../Include/CAppParcial2.h"
 #include "../Include/C3DModel.h"
@@ -8,6 +8,13 @@
 
 
 CAppProyectoP3::CAppProyectoP3()
+{
+	Log << "CAppProyecto3" << endl;
+	myWorld = new CWorld(getOpenGLRenderer());
+}
+
+CAppProyectoP3::CAppProyectoP3(int window_width, int window_height) :
+	CApp(window_width, window_height)
 {
 	Log << "CAppProyecto3" << endl;
 	myWorld = new CWorld(getOpenGLRenderer());
@@ -27,13 +34,33 @@ void CAppProyectoP3::onMouse(float deltaX, float deltaY)
 	}
 }
 
+void CAppProyectoP3::onF3(int mods)
+{
+	// Check BITWISE AND to detect shift/alt/ctrl
+	if (mods & KEY_MOD_SHIFT)
+	{
+		moveCamera(-1.0f);
+	}
+	else
+	{
+		moveCamera(1.0f);
+	}
+}
+
+void CAppProyectoP3::moveCamera(float direction)
+{
+	if (getOpenGLRenderer() != NULL)
+	{
+		getOpenGLRenderer()->moveCamera(direction);
+	}
+}
+
 void CAppProyectoP3::update(double deltaTime)
 {
 }
 
 void CAppProyectoP3::run()
 {
-	myWorld->Initialize();
 
 	// Check if CGameWindow object and window library been initialized
 	if (canRun())
@@ -49,11 +76,15 @@ void CAppProyectoP3::run()
 			// Initialize a test cube
 			getOpenGLRenderer()->initializeTestObjects();
 
+			myWorld->Initialize();
+
 			// Create our menu (add all menu items)
+			/*
 			if (!initializeMenu())
 			{
 				return;
 			}
+			*/
 
 			// Enter main loop
 			Log << "Entering Main loop" << endl;

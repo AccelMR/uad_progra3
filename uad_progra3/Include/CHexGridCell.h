@@ -12,7 +12,7 @@ public:
 
 	CVector3 getCenter();
 
-	unsigned int getGraphicMemoryObjectId();
+	unsigned int * getGraphicMemoryObjectId();
 
 	void getVertices(float* v);
 
@@ -20,7 +20,7 @@ private:
 	const float size	= 1.0f;
 	const float radius	= 1.0f;
 
-	unsigned int graphicMemoryObjectId;
+	unsigned int *graphicMemoryObjectId;
 
 	CVector3 m_vertex [6];
 	CVector3 m_center;

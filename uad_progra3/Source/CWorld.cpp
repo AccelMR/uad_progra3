@@ -30,7 +30,7 @@ void CWorld::render()
 	float color[3] = { 0.95f, 0.95f, 0.95f };
 	MathHelper::Matrix4 modelMatrix = MathHelper::ModelMatrix((float)0, camPos);
 
-	OpenGLRenderer->renderObject(
+	OpenGLRenderer->renderWireframeObject(
 		myHexGrid->getShaderProgramId(),
 		myHexGrid->getVAOID(),
 		myHexGrid->getNumFaces(),

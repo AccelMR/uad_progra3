@@ -22,7 +22,7 @@ int main()
 	*/
 
 	CApp *app = NULL;                      // Pointer to BASE class CApp
-	app = new CAppProyectoP3();
+	app = new CAppProyectoP3(800, 600);
 	app->run();
 	delete app;
 	app = nullptr;
