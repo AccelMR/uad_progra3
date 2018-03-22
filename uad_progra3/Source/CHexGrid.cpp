@@ -10,7 +10,7 @@ CHexGrid::CHexGrid() :
 
 CHexGrid::~CHexGrid()
 {
-	delete[] m_hexLayout;
+	delete[] *m_hexLayout;
 }
 
 bool CHexGrid::Inicialize(COpenGLRenderer *openGLRenderer)
@@ -34,14 +34,20 @@ bool CHexGrid::Inicialize(COpenGLRenderer *openGLRenderer)
 
 			float x = (float)i * 1.5f;
 			float y = (float)j * 2.0f;
-
+			
 			if (i % 2 == 0) {
 				m_hexLayout[i][j] = new CHexGridCell(x, y);
 			}
-
+			
 			else if (i % 2 != 0) {
 				m_hexLayout[i][j] = new CHexGridCell(x, y - 1);
 			}
+
+			//if (i == 0)
+			//	if (j == 0)
+			//		m_hexLayout[i][j] = new CHexGridCell(i, j);
+			//
+			//m_hexLayout[i][j] = new CHexGridCell (j*((3 * s) / 2), )
 
 			m_hexLayout[i][j]->getVertices(v);
 			memcpy(&verticesRaw[offset], v, sizeof (float) * (6 * 3));
@@ -50,10 +56,17 @@ bool CHexGrid::Inicialize(COpenGLRenderer *openGLRenderer)
 	}
 
 
-	unsigned short singleHexIndices[] = {	1,2,0,
+	/*unsigned short singleHexIndices[] = {	1,2,0,
 											0,2,3,
 											3,4,0,
-											0,4,5 };
+											0,4,5 };*/
+
+
+	unsigned short singleHexIndices[] = { 
+		2,1,0,
+		3,5,4,
+		3,0,5,
+		2,0,3 };
 
 	size_t inOffset = 0;
 	size_t outOffset = 0;
@@ -111,5 +124,5 @@ unsigned int * CHexGrid::getVAOID()
 
 int CHexGrid::getNumIndices()
 {
-	return 12 * SIZE_OF_HEXGRID * SIZE_OF_HEXGRID;
+	return 4 * SIZE_OF_HEXGRID * SIZE_OF_HEXGRID;
 }

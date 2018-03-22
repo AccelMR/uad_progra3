@@ -13,11 +13,11 @@ CHexGridCell::CHexGridCell(float x, float y) :
 	m_vertex[5].setValues(x - (size / 2.0f), 0,     y - radius);	// P5
 
 	// Calculate center
-	//CVector3 xC, yC;
-	//xC = m_vertex[5] + ((m_vertex[5] + m_vertex[1]) / 2);
-	//yC = m_vertex[4] + ((m_vertex[4] + m_vertex[2]) / 2);
+	CVector3 xC, yC;
+	xC = m_vertex[5] + ((m_vertex[5] + m_vertex[1]) / 2);
+	yC = m_vertex[4] + ((m_vertex[4] + m_vertex[2]) / 2);
 	
-	m_center.setValues(x, 0, y);
+	m_center.setValues(xC.getX(), 0, yC.getZ());
 }
 
 CHexGridCell::~CHexGridCell()
