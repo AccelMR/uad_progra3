@@ -33,7 +33,7 @@ void CWorld::render()
 	OpenGLRenderer->renderWireframeObject(
 		myHexGrid->getShaderProgramId(),
 		myHexGrid->getVAOID(),
-		myHexGrid->getNumFaces(),
+		myHexGrid->getNumIndices(),
 		color,
 		&modelMatrix
 	);

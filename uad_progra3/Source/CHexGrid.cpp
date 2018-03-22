@@ -10,39 +10,75 @@ CHexGrid::CHexGrid() :
 
 CHexGrid::~CHexGrid()
 {
+	delete[] m_hexLayout;
 }
 
 bool CHexGrid::Inicialize(COpenGLRenderer *openGLRenderer)
 {
+	// Temp array that saves XYZ of just one hexcell
 	float v[6*3];
-	//float *vertices = new float[SIZE_OF_HEXGRID *SIZE_OF_HEXGRID * 6 * 3];
-	float vertices[18] = { .5,0,-1,1,0,0,.5,0,1,-.5,0,1,-1,0,0,-.5,0,-1 };
-	unsigned short *indices = new unsigned short[SIZE_OF_HEXGRID*SIZE_OF_HEXGRID * 4];
 
-	// Robin
+	// Array that saves XYZ of each hexcell
+	float *verticesRaw = new float[sizeof(float)*(SIZE_OF_HEXGRID *SIZE_OF_HEXGRID * 6 * 3)];
+	
+	// Indices that indicates the order of triangles inner the hex
+	unsigned short *indices = new unsigned short[3 * 4 * SIZE_OF_HEXGRID * SIZE_OF_HEXGRID];
+
+	//float vertices[] = { .5,0,-1,1,0,0,.5,0,1,-.5,0,1,-1,0,0,-.5,0,-1 };
+
+	// HexLayout, if center is even then it adds 1/2 to X(i) else (odd) it adds 1/2 to X(i) and 1 to Y(j)
+	// Then it creates the VerticesRaw array. It has XYZ of each vertex
 	size_t offset = 0;
 	for (int i  = 0; i  < SIZE_OF_HEXGRID; i++) {
 		for (int j = 0; j < SIZE_OF_HEXGRID; j++) {
+			float x = (float)i * 1.5f;
 
 			if (i == 0) {
-				if (j == 0) { m_hexLayout[i][j] = new CHexGridCell(i, j); }
-				else { m_hexLayout[i][j] = new CHexGridCell(i, j + 1); }
+				if (j == 0) {
+					m_hexLayout[i][j] = new CHexGridCell(x, (float)j);
+				}
+				else { 
+					m_hexLayout[i][j] = new CHexGridCell(x, (float)j + j);
+				}
+				
+			}
+
+			else if (i % 2 != 0) {
+				if (j == 0) { 
+					m_hexLayout[i][j] = new CHexGridCell(x, (float)j + 1.0f);
+				}
+				else  {
+					m_hexLayout[i][j] = new CHexGridCell(x, (float)j + j + 1.0f);
+				}
 			}
 
 			else if (i % 2 == 0) {
-				if (j == 0) { m_hexLayout[i][j] = new CHexGridCell(i + .5, j); }
-				else { m_hexLayout[i][j] = new CHexGridCell(i + .5, j + 1); }
+				if (j == 0) { 
+					m_hexLayout[i][j] = new CHexGridCell(x, (float)j);
+				}
+				else  {
+					m_hexLayout[i][j] = new CHexGridCell(x, (float)j + j);
+				}
 			}
 
-			else {
-				if (j == 0) { m_hexLayout[i][j] = new CHexGridCell(i + 0.5, j + 1); }
-				else { m_hexLayout[i][j] = new CHexGridCell(i + 0.5, j + 2); }
-			}
 
 			m_hexLayout[i][j]->getVertices(v);
-			//memcpy(&vertices[offset], v, 6 * 3);
-			//offset += 6 * 3;
+			memcpy(&verticesRaw[offset], v, sizeof (float) * (6 * 3));
+			offset += 6 * 3;
 		}
+	}
+
+	for (size_t i = 0; i < 200; i++)
+	{
+	//	if (i>17)
+	//	{
+	//		for (size_t j = 0; j < 3 ; j++)
+	//		{
+	//			std::cout << j + 1 << ":\t" << verticesRaw[i * 3 + j] << "\t\t";
+	//
+	//		}
+	//	}
+	//	std::cout << std::endl;
 	}
 
 	unsigned short singleHexIndices[] = {	1,2,0,
@@ -54,11 +90,11 @@ bool CHexGrid::Inicialize(COpenGLRenderer *openGLRenderer)
 	size_t outOffset = 0;
 	for (size_t i = 0; i < SIZE_OF_HEXGRID; i++) {
 		for (size_t j = 0; j < SIZE_OF_HEXGRID; j++) {
-			for (size_t k = 0; k < SIZE_OF_HEXGRID; k++) {
+			for (size_t k = 0; k < 12; k++) {
 				indices[inOffset + k] = singleHexIndices[k] + outOffset;
-				inOffset++;
 			}
 			outOffset += 6;
+			inOffset += 12;
 		}
 	}
 
@@ -84,9 +120,12 @@ bool CHexGrid::Inicialize(COpenGLRenderer *openGLRenderer)
 
 	openGLRenderer->allocateGraphicsMemoryForObject(
 		&gridShaderProgramID,
-		&gridVAOID, vertices,
+		&gridVAOID, verticesRaw,
 		SIZE_OF_HEXGRID * SIZE_OF_HEXGRID * 6,
-		singleHexIndices, SIZE_OF_HEXGRID * SIZE_OF_HEXGRID * 4 * 3);
+		indices, getNumIndices());
+
+	delete[] verticesRaw;
+	delete[] indices;
 
 	return true;
 }
@@ -101,7 +140,7 @@ unsigned int * CHexGrid::getVAOID()
 	return &gridVAOID;
 }
 
-size_t CHexGrid::getNumFaces()
+int CHexGrid::getNumIndices()
 {
-	return 4 * 5 * 5;
+	return 12 * SIZE_OF_HEXGRID * SIZE_OF_HEXGRID;
 }

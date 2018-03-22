@@ -243,7 +243,7 @@ void CGameWindow::mainLoop(void *appPointer)
 			{
 				fps = (numFramesRendered / (one_second / 1000.0));
 				one_second -= 1000.0;
-				cout << "FPS: " << fps << endl;
+				//cout << "FPS: " << fps << endl;
 				numFramesRendered = 0;
 			}
 		}

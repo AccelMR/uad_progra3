@@ -7,7 +7,7 @@
 class CHexGridCell
 {
 public:
-	CHexGridCell(int x, int y);
+	CHexGridCell(float x, float y);
 	~CHexGridCell();
 
 	CVector3 getCenter();

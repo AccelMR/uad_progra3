@@ -1,16 +1,16 @@
 #include "..\Include\CHexGridCell.h"
 
 
-CHexGridCell::CHexGridCell(int x, int y) :
+CHexGridCell::CHexGridCell(float x, float y) :
 	graphicMemoryObjectId(NULL)
 {
 	// Set vertex points
-	m_vertex[0].setValues((float)x + (size / 2), 0, (float)y - radius);	// P0
-	m_vertex[1].setValues((float)x + size, 0, (float)y);				// P1
-	m_vertex[2].setValues((float)x + (size / 2), 0, (float)y + radius); // P2
-	m_vertex[3].setValues((float)x - (size / 2), 0, (float)y + radius);	// P3
-	m_vertex[4].setValues((float)x - size, 0, y);						// P4
-	m_vertex[5].setValues((float)x - (size / 2), 0, (float)y - radius);	// P5
+	m_vertex[0].setValues(x + (size / 2.0f), 0,     y - radius);    // P0
+	m_vertex[1].setValues(x + size,			 0,		y		  );	// P1
+	m_vertex[2].setValues(x + (size / 2.0f), 0,     y + radius);    // P2
+	m_vertex[3].setValues(x - (size / 2.0f), 0,     y + radius);	// P3
+	m_vertex[4].setValues(x - size,			 0,		y		  );	// P4
+	m_vertex[5].setValues(x - (size / 2.0f), 0,     y - radius);	// P5
 
 	// Calculate center
 	CVector3 xC, yC;
