@@ -25,8 +25,9 @@ public:
 
 private:
 
-	//Size of each side of hexagon
-	const float size = 2.0f;
+	// Size of each side of hexagon
+	// At the same time, it is the size from center to any vertex.
+	const float sizeOfSide = 1.0f;
 
 	// Size of line that goes from the center to the top/bottom edge
 	float a;
