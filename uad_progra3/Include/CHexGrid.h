@@ -24,11 +24,18 @@ public:
 	int getNumIndices();
 
 private:
-	CHexGridCell * m_hexLayout[SIZE_OF_HEXGRID][SIZE_OF_HEXGRID];
 
-	const float size = 1.0f;
-	const float radius = 0.8660254038f;
+	//Size of each side of hexagon
+	const float size = 2.0f;
+
+	// Size of line that goes from the center to the top/bottom edge
+	float a;
+
+	CHexGridCell * m_hexLayout[SIZE_OF_HEXGRID][SIZE_OF_HEXGRID];
 
 	unsigned int gridShaderProgramID;
 	unsigned int gridVAOID;
+
+protected:
+
 };

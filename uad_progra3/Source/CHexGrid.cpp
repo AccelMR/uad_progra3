@@ -6,6 +6,7 @@ CHexGrid::CHexGrid() :
 	gridShaderProgramID(0),
 	gridVAOID(0)
 {
+	a = (sqrt(3))*size / 2;
 }
 
 CHexGrid::~CHexGrid()
@@ -24,30 +25,19 @@ bool CHexGrid::Inicialize(COpenGLRenderer *openGLRenderer)
 	// Indices that indicates the order of triangles inner the hex
 	unsigned short *indices = new unsigned short[3 * 4 * SIZE_OF_HEXGRID * SIZE_OF_HEXGRID];
 
-	//float vertices[] = { .5,0,-1,1,0,0,.5,0,1,-.5,0,1,-1,0,0,-.5,0,-1 };
-
 	// HexLayout, if center is even then it adds 1/2 to X(i) else (odd) it adds 1/2 to X(i) and 1 to Y(j)
 	// Then it creates the VerticesRaw array. It has XYZ of each vertex
 	size_t offset = 0;
 	for (int i  = 0; i  < SIZE_OF_HEXGRID; i++) {
 		for (int j = 0; j < SIZE_OF_HEXGRID; j++) {
 
-			float x = (float)i * 1.5f;
-			float y = (float)j * 2.0f;
+			// First hexagon is going to be on 0,0 
+			if (i == 0)
+				if (j == 0)
+					m_hexLayout[i][j] = new CHexGridCell(i, j, size, a);
 			
-			if (i % 2 == 0) {
-				m_hexLayout[i][j] = new CHexGridCell(x, y);
-			}
-			
-			else if (i % 2 != 0) {
-				m_hexLayout[i][j] = new CHexGridCell(x, y - 1);
-			}
-
-			//if (i == 0)
-			//	if (j == 0)
-			//		m_hexLayout[i][j] = new CHexGridCell(i, j);
-			//
-			//m_hexLayout[i][j] = new CHexGridCell (j*((3 * s) / 2), )
+			// http://webdevtipstricksandinfo.blogspot.mx/2012/08/creating-hexagonal-grid-for-games-c-java.html
+			m_hexLayout[i][j] = new CHexGridCell(j*((3 * size) / 2), (j % 2)*a + 2 * i*a, size, a);
 
 			m_hexLayout[i][j]->getVertices(v);
 			memcpy(&verticesRaw[offset], v, sizeof (float) * (6 * 3));
