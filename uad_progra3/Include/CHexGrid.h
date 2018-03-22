@@ -8,7 +8,7 @@
 #include "..\Include\COpenGLRenderer.h"
 #include "..\Include\Globals.h"
 
-#define SIZE_OF_HEXGRID 10
+#define SIZE_OF_HEXGRID 2
 
 
 class CHexGrid

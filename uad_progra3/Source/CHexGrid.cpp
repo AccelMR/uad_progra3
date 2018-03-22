@@ -31,36 +31,17 @@ bool CHexGrid::Inicialize(COpenGLRenderer *openGLRenderer)
 	size_t offset = 0;
 	for (int i  = 0; i  < SIZE_OF_HEXGRID; i++) {
 		for (int j = 0; j < SIZE_OF_HEXGRID; j++) {
-			float x = (float)i * 1.5f;
 
-			if (i == 0) {
-				if (j == 0) {
-					m_hexLayout[i][j] = new CHexGridCell(x, (float)j);
-				}
-				else { 
-					m_hexLayout[i][j] = new CHexGridCell(x, (float)j + j);
-				}
-				
+			float x = (float)i * 1.5f;
+			float y = (float)j * 2.0f;
+
+			if (i % 2 == 0) {
+				m_hexLayout[i][j] = new CHexGridCell(x, y);
 			}
 
 			else if (i % 2 != 0) {
-				if (j == 0) { 
-					m_hexLayout[i][j] = new CHexGridCell(x, (float)j + 1.0f);
-				}
-				else  {
-					m_hexLayout[i][j] = new CHexGridCell(x, (float)j + j + 1.0f);
-				}
+				m_hexLayout[i][j] = new CHexGridCell(x, y - 1);
 			}
-
-			else if (i % 2 == 0) {
-				if (j == 0) { 
-					m_hexLayout[i][j] = new CHexGridCell(x, (float)j);
-				}
-				else  {
-					m_hexLayout[i][j] = new CHexGridCell(x, (float)j + j);
-				}
-			}
-
 
 			m_hexLayout[i][j]->getVertices(v);
 			memcpy(&verticesRaw[offset], v, sizeof (float) * (6 * 3));
@@ -68,18 +49,6 @@ bool CHexGrid::Inicialize(COpenGLRenderer *openGLRenderer)
 		}
 	}
 
-	for (size_t i = 0; i < 200; i++)
-	{
-	//	if (i>17)
-	//	{
-	//		for (size_t j = 0; j < 3 ; j++)
-	//		{
-	//			std::cout << j + 1 << ":\t" << verticesRaw[i * 3 + j] << "\t\t";
-	//
-	//		}
-	//	}
-	//	std::cout << std::endl;
-	}
 
 	unsigned short singleHexIndices[] = {	1,2,0,
 											0,2,3,
