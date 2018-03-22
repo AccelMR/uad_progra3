@@ -17,8 +17,8 @@ public:
 	void getVertices(float* v);
 
 private:
-	const float size = .1;
-	const float radius = .1;
+	const float size = 1;
+	const float radius = 1;
 
 	unsigned int *graphicMemoryObjectId;
 
