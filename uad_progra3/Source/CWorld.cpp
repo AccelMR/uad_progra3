@@ -24,11 +24,10 @@ bool CWorld::Initialize()
 	return false;
 }
 
-void CWorld::render()
+void CWorld::render(CVector3 CamPosition)
 {
-	CVector3 camPos(0, 0, 0);
 	float color[3] = { 0.95f, 0.95f, 0.95f };
-	MathHelper::Matrix4 modelMatrix = MathHelper::ModelMatrix((float)0, camPos);
+	MathHelper::Matrix4 modelMatrix = MathHelper::ModelMatrix((float)0, CamPosition);
 
 	OpenGLRenderer->renderWireframeObject(
 		myHexGrid->getShaderProgramId(),

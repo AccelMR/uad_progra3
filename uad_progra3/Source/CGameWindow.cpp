@@ -147,11 +147,11 @@ bool CGameWindow::create(const char *windowTitle)
 	/* Keyboard callback */
 	glfwSetKeyCallback(m_Window, keyboardCallback);
 
-	/* Mouse kolvac*/
+	/* Mouse callback*/
 	glfwSetCursorPosCallback(m_Window, mouseCallback);
 
 	/* Hides mouse */
-	//glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	/* Set window to pos */
 	glfwSetWindowPos(m_Window, 10, (view->height - m_Height) / 2);
@@ -523,8 +523,8 @@ void CGameWindow::processInput(void *appPointer)
 
 			if (CGameWindow::requestMouseMove) 
 			{
-				((CApp *)appPointer)->onMouseMove(CGameWindow::cursorMovement.getX(),
-					CGameWindow::cursorMovement.getY());
+				((CApp *)appPointer)->onMouseMove(CGameWindow::cursorMovement.getX(),CGameWindow::cursorMovement.getY());
+				requestMouseMove = false;
 			}
 		}
 	}

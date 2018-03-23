@@ -7,7 +7,10 @@
 #include "..\Include\CWorld.h"
 #include <Windows.h>
 
-class CAppProyectoP3 : public CApp
+#define DEFAULT_CAMERA_MOVE_SPEED 0.005
+ 
+class CAppProyectoP3 : 
+	public CApp
 {
 private:
 	CWorld *myWorld;
@@ -32,7 +35,8 @@ public:
 	CAppProyectoP3(int window_width, int window_height);
 	~CAppProyectoP3();
 
-	 void onMouse(float deltaX, float deltaY);
+	 void onMouseMove(float deltaX, float deltaY);
+	 void onMouseClick(float direction);
 	 void onF3(int mods);
 
 	 void moveCamera(float direction);

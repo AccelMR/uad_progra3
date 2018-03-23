@@ -25,12 +25,13 @@ CAppProyectoP3::~CAppProyectoP3()
 {
 }
 
-void CAppProyectoP3::onMouse(float deltaX, float deltaY)
+void CAppProyectoP3::onMouseMove(float deltaX, float deltaY)
 {
+	// Camera
 	CCamera* cam = getCamera();
-
 	if (cam != nullptr) {
-		cam->move(deltaX, deltaY);	
+		cam->move(-deltaX * DEFAULT_CAMERA_MOVE_SPEED,
+			deltaY * DEFAULT_CAMERA_MOVE_SPEED);
 	}
 }
 
@@ -112,7 +113,7 @@ void CAppProyectoP3::render()
 			// Get a matrix that has both the object rotation and translation
 			//MathHelper::Matrix4 modelMatrix = MathHelper::ModelMatrix((float)totalDegreesRotatedRadians, m_objectPosition);
 
-			myWorld->render();
+			myWorld->render(getCamera()->getPosition());
 
 			/**/
 		}

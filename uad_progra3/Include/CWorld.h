@@ -19,7 +19,7 @@ public:
 	~CWorld();
 
 	bool Initialize();
-	void render();
+	void render(CVector3 CamPosition);
 	bool isInitialized();
 };
 

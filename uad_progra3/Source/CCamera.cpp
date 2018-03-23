@@ -2,7 +2,8 @@
 
 
 
-CCamera::CCamera()
+CCamera::CCamera():
+	position(0,0,0)
 {
 }
 
@@ -13,14 +14,15 @@ CCamera::~CCamera()
 
 void CCamera::move(float deltaX, float deltaY)
 {
-	float values[3];
-	pos.getValues(values);
-	values[0] += deltaX;
-	values[2] += deltaY;
-	pos.setValues(values);
+	position.setValues(position.getX() + deltaX, position.getY(), position.getZ() - deltaY);
 }
 
 void CCamera::reset()
 {
 
+}
+
+CVector3 CCamera::getPosition()
+{
+	return position;
 }
