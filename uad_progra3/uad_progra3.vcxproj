@@ -186,6 +186,8 @@
     <ClInclude Include="Include\CHexGridCell.h" />
     <ClInclude Include="Include\CLogger.h" />
     <ClInclude Include="Include\COpenGLRenderer.h" />
+    <ClInclude Include="Include\CQuadTree.h" />
+    <ClInclude Include="Include\CQuadTreeNode.h" />
     <ClInclude Include="Include\CVector3.h" />
     <ClInclude Include="Include\CWideStringHelper.h" />
     <ClInclude Include="Include\CWorld.h" />
@@ -221,6 +223,8 @@
     <ClCompile Include="Source\CHexGridCell.cpp" />
     <ClCompile Include="Source\CLogger.cpp" />
     <ClCompile Include="Source\COpenGLRenderer.cpp" />
+    <ClCompile Include="Source\CQuadTree.cpp" />
+    <ClCompile Include="Source\CQuadTreeNode.cpp" />
     <ClCompile Include="Source\CVector3.cpp" />
     <ClCompile Include="Source\CWorld.cpp" />
     <ClCompile Include="Source\LoadShaders.cpp" />

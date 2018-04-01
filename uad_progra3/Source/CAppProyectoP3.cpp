@@ -111,7 +111,7 @@ void CAppProyectoP3::render()
 		if (myWorld != NULL && myWorld->isInitialized())
 		{
 			// Get a matrix that has both the object rotation and translation
-			//MathHelper::Matrix4 modelMatrix = MathHelper::ModelMatrix((float)totalDegreesRotatedRadians, m_objectPosition);
+			// MathHelper::Matrix4 modelMatrix = MathHelper::ModelMatrix((float)totalDegreesRotatedRadians, m_objectPosition);
 
 			myWorld->render(getCamera()->getPosition());
 

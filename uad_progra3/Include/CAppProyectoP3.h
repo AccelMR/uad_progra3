@@ -36,7 +36,6 @@ public:
 	~CAppProyectoP3();
 
 	 void onMouseMove(float deltaX, float deltaY);
-	 void onMouseClick(float direction);
 	 void onF3(int mods);
 
 	 void moveCamera(float direction);

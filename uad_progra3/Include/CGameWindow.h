@@ -68,6 +68,8 @@ private:
 	static void resizeCallback(GLFWwindow * window, int width, int height);
 	// This callback will be called by GLFW when a physical key is pressed in the keyboard
 	static void keyboardCallback(GLFWwindow * window, int key, int scancode, int action, int mods);
+
+	static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
 	//
 	static void mouseCallback(GLFWwindow* window, double xpos, double ypos);
 	// Process user input (keyboard, mouse)

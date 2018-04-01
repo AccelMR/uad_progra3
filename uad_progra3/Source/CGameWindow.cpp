@@ -151,10 +151,14 @@ bool CGameWindow::create(const char *windowTitle)
 	glfwSetCursorPosCallback(m_Window, mouseCallback);
 
 	/* Hides mouse */
-	glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	//glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	/* Set window to pos */
 	glfwSetWindowPos(m_Window, 10, (view->height - m_Height) / 2);
+
+	/* Mouse Button callbak */
+	glfwSetMouseButtonCallback(m_Window, mouseButtonCallback);
+
 
 	HWND consoleWindow = GetConsoleWindow();
 	RECT r;
@@ -364,6 +368,16 @@ void CGameWindow::keyboardCallback(GLFWwindow * window, int key, int scancode, i
 			CGameWindow::requestArrowRight = false;
 			break;
 		}
+	}
+}
+
+void CGameWindow::mouseButtonCallback(GLFWwindow * window, int button, int action, int mods)
+{
+	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
+		std::cout << lastMousePos.getX() << " ";
+		std::cout << lastMousePos.getY() << " ";
+		std::cout << lastMousePos.getY() << " ";
+		std::cout << std::endl;
 	}
 }
 
