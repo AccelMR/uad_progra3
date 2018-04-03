@@ -3,6 +3,6 @@ class CQuadTreeNode
 {
 public:
 	CQuadTreeNode();
-	~CQuadTreeNode();
+	~CQuadTreeNode();ff
 };
 
