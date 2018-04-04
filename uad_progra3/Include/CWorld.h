@@ -4,11 +4,13 @@
 #include "..\Include\CHexGrid.h"
 #include "..\Include\CGameMenu.h"
 #include "..\Include\CApp.h"
+#include "..\Include\CQuadTree.h"
 
 class CWorld
 {
 private: 
 	COpenGLRenderer * const OpenGLRenderer;
+	CQuadTree *myQuadTree;
 	bool initialized;
 
 	CHexGrid *myHexGrid;

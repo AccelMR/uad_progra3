@@ -3,7 +3,8 @@
 
 
 CWorld::CWorld(COpenGLRenderer *openGLRenderer) :
-	OpenGLRenderer(openGLRenderer)
+	OpenGLRenderer(openGLRenderer),
+	myQuadTree(nullptr)
 {
 	myHexGrid = nullptr;
 	initialized = false;
@@ -19,6 +20,8 @@ bool CWorld::Initialize()
 	myHexGrid = new CHexGrid();
 	if (myHexGrid->Inicialize(OpenGLRenderer)) {
 		initialized = true;
+		myQuadTree = new CQuadTree(myHexGrid);
+		myQuadTree->initialized();
 		return true;
 	}
 	return false;

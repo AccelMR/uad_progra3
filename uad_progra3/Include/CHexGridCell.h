@@ -16,10 +16,12 @@ public:
 
 	void getVertices(float* v);
 
+	CVector3 getPoint(int point);
+
 private:
 
 	unsigned int *graphicMemoryObjectId;
 
-	CVector3 m_vertex [6];
-	CVector3 m_center;
+	CVector3 vertex [6];
+	CVector3 center;
 };

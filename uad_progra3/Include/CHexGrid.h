@@ -8,7 +8,7 @@
 #include "..\Include\COpenGLRenderer.h"
 #include "..\Include\Globals.h"
 
-#define SIZE_OF_HEXGRID 100
+#define SIZE_OF_HEXGRID 3
 
 
 class CHexGrid
@@ -22,6 +22,8 @@ public:
 	unsigned int* getShaderProgramId();
 	unsigned int* getVAOID();
 	int getNumIndices();
+
+	CVector3 getCellPointInfo(int x, int y, int point);
 
 private:
 

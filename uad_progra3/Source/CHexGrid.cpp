@@ -26,7 +26,7 @@ bool CHexGrid::Inicialize(COpenGLRenderer *openGLRenderer)
 	unsigned short *indices = new unsigned short[3 * 4 * SIZE_OF_HEXGRID * SIZE_OF_HEXGRID];
 
 	// Pos of first hexagon, calculates size of center
-	float x, y;
+	float x = 0, y = 0;
 	if (SIZE_OF_HEXGRID % 2 == 0) {
 		int hexDiv = SIZE_OF_HEXGRID / 2;
 		x = -1*((sizeOfSide * 2 * hexDiv) + (hexDiv*sizeOfSide)) / 2;
@@ -121,4 +121,9 @@ unsigned int * CHexGrid::getVAOID()
 int CHexGrid::getNumIndices()
 {
 	return 4 * SIZE_OF_HEXGRID * SIZE_OF_HEXGRID;
+}
+
+CVector3 CHexGrid::getCellPointInfo(int x, int y, int point)
+{
+	return m_hexLayout[x][y]->getPoint(point);
 }
