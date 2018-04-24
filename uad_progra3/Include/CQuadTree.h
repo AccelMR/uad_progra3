@@ -3,18 +3,21 @@
 #include <iostream>
 #include "../Include/CVector3.h"
 #include "../Include/CHexGrid.h"
+#include "../Include/CQuadTreeNode.h"
 
 class CQuadTree
 {
 private:
-	CVector3 firstFourPoints [4];
 	CHexGrid *myHex;
-
+	CVector3 verticesRoot [2];
+	
+	//CQuadTreeNode *root;
 
 public:
 	CQuadTree(CHexGrid *myhex);
 	~CQuadTree();
-
-	void initialized();
+	
+	CVector3* getVerticesRoot();
+	bool Inicialize();
 };
 

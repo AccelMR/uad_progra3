@@ -14,21 +14,37 @@ class CAppProyectoP3 :
 {
 private:
 	CWorld *myWorld;
+	DWORD check;
+	DWORD check2;
+	DWORD threadID_1;
+	HANDLE thread1;
+	DWORD threadID_2;
+	HANDLE thread2;
+	DWORD threadID_3;
+	HANDLE thread3;
+
+	HANDLE hEvent;
+	HANDLE hEvent2;
+	bool init;
 
 	// Current delta time (time of the current frame - time of the last frame)
-	//double m_currentDeltaTime;
+	double m_currentDeltaTime;
 
 	// Current object rotation, expressed in degrees
-	//double m_objectRotation;
+	double m_objectRotation;
 
 	// Current object position
-	//CVector3 m_objectPosition;
+	CVector3 m_objectPosition;
 
 	//  Object rotation speed (degrees per second)
-	//double m_rotationSpeed;
+	double m_rotationSpeed;
 
 	// Pointer to an object of type C3DModel
 	//C3DModel *m_p3DModel;
+
+	static DWORD InitilizeWorld(PVOID pvParam);
+	static DWORD InitilizeQuadTree(PVOID pvParam);
+	static DWORD CreateDefaultWorld(PVOID pvParam);
 
 public:
 	CAppProyectoP3();
@@ -44,5 +60,9 @@ public:
 	 void run();
 	 void render();
 	 bool initializeMenu();
+	 HANDLE getEvent() { return this->hEvent; }
+	 HANDLE getEvent2() { return this->hEvent2; }
+
+	 //double getRotation() {return this->m_}
 };
 

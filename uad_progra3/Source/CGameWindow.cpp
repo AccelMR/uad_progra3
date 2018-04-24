@@ -151,7 +151,7 @@ bool CGameWindow::create(const char *windowTitle)
 	glfwSetCursorPosCallback(m_Window, mouseCallback);
 
 	/* Hides mouse */
-	//glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	/* Set window to pos */
 	glfwSetWindowPos(m_Window, 10, (view->height - m_Height) / 2);

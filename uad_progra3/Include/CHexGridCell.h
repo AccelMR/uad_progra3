@@ -13,6 +13,8 @@ public:
 	CVector3 getCenter();
 
 	unsigned int * getGraphicMemoryObjectId();
+	void setTextureID(unsigned int textureID);
+	unsigned int getTextureID();
 
 	void getVertices(float* v);
 
@@ -21,6 +23,7 @@ public:
 private:
 
 	unsigned int *graphicMemoryObjectId;
+	unsigned int textureID;
 
 	CVector3 vertex [6];
 	CVector3 center;

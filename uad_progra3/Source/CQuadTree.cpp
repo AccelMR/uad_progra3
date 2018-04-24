@@ -4,8 +4,8 @@
 
 CQuadTree::CQuadTree(CHexGrid *myhex):
 	myHex(myhex)
+	//root(nullptr)
 {
-
 }
 
 
@@ -13,35 +13,38 @@ CQuadTree::~CQuadTree()
 {
 }
 
-void CQuadTree::initialized()
+CVector3* CQuadTree::getVerticesRoot()
+{
+	return verticesRoot;
+}
+
+bool CQuadTree::Inicialize()
 {
 	// Points that I need to build the QuadTree
-	CVector3 point4ofFC;
-	CVector3 point3ofFC;
-	CVector3 point3ofLCR;
-	CVector3 point3ofLSRC;
+	CVector3 fourthPoint_firstCell;
+	CVector3 thirdPoint_firstCell;
+	CVector3 firstPoint_lastCellRow;
+	CVector3 zeroPoint_lastCell;
 
-	point4ofFC = myHex->getCellPointInfo(0, 0, 4);
-	point3ofFC = myHex->getCellPointInfo(0, 0, 3);
-	point3ofLCR = myHex->getCellPointInfo(SIZE_OF_HEXGRID - 1, 0, 3);
-	point3ofLSRC = myHex->getCellPointInfo(1, SIZE_OF_HEXGRID - 1, 3);
+	fourthPoint_firstCell = myHex->getCellPointInfo(0, 0, 4);
+	thirdPoint_firstCell = myHex->getCellPointInfo(0, 0, 3);
+	firstPoint_lastCellRow = myHex->getCellPointInfo(SIZE_OF_HEXGRID - 1, 0, 1);
+	zeroPoint_lastCell = myHex->getCellPointInfo(SIZE_OF_HEXGRID - 1, SIZE_OF_HEXGRID - 1, 0);
 
-	// P0 of QuadTree
-	firstFourPoints[0].setValues(point4ofFC.getX(),0,point3ofFC.getZ());
+	verticesRoot[0].setValues(fourthPoint_firstCell.getX(), 0, thirdPoint_firstCell.getZ());
+	//verticesRoot[1].setValues(firstPoint_lastCellRow.getX(), 0, thirdPoint_firstCell.getZ());
+	verticesRoot[1].setValues(firstPoint_lastCellRow.getX(), 0, zeroPoint_lastCell.getZ());
+	//verticesRoot[3].setValues(fourthPoint_firstCell.getX(), 0, zeroPoint_lastCell.getZ());
 
-	// P1 of QuadTree
-	firstFourPoints[1].setValues(point3ofLCR.getX(),0,point3ofFC.getZ());
-
-	// P3 of QuadTree
-	firstFourPoints[2].setValues(point4ofFC.getX(),0,point3ofLSRC.getZ());
-
-	//P4 of QuadTree
-	firstFourPoints[3].setValues(point3ofLCR.getX(),0,point3ofLSRC.getZ());
-
-	for (size_t i = 0; i < 4; i++)
+	for (size_t i = 0; i < 2; i++)
 	{
-		std::cout << firstFourPoints[i].getX() << "   ";
-		std::cout << firstFourPoints[i].getZ();
+		std::cout << verticesRoot[i].getX() << "   ";
+		std::cout << verticesRoot[i].getZ();
 		std::cout << std::endl;
 	}
+
+	//root = new CQuadTreeNode(verticesRoot, myHex);
+	//root->Subdivide(myHex);
+
+	return true;
 }

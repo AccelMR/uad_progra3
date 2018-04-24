@@ -7,18 +7,17 @@ CHexGridCell::CHexGridCell(float x, float y, const float size, float a) :
 	center.setValues(x, 0, y);
 
 	// Set vertex points
-	vertex[0].setValues(x + (size / 2.0f),	0,      y - a);			// P0
-	vertex[1].setValues(x + size,				0,		y	 );		// P1
-	vertex[2].setValues(x + (size / 2.0f),	0,      y + a);			// P2
-	vertex[3].setValues(x - (size / 2.0f),	0,      y + a);			// P3
-	vertex[4].setValues(x - size,				0,		y	 );		// P4
-	vertex[5].setValues(x - (size / 2.0f),	0,      y - a);			// P5
+	vertex[0].setValues(x + (size / 2.0f),	0,      y - a	);		// P0
+	vertex[1].setValues(x +  size,			0,		y		);		// P1
+	vertex[2].setValues(x + (size / 2.0f),	0,      y + a	);		// P2
+	vertex[3].setValues(x - (size / 2.0f),	0,      y + a	);		// P3
+	vertex[4].setValues(x -  size,			0,		y		);		// P4
+	vertex[5].setValues(x - (size / 2.0f),	0,      y - a	);		// P5
 	
 }
 
 CHexGridCell::~CHexGridCell()
 {
-
 }
 
 CVector3 CHexGridCell::getCenter()
@@ -29,6 +28,16 @@ CVector3 CHexGridCell::getCenter()
 unsigned int * CHexGridCell::getGraphicMemoryObjectId()
 {
 	return graphicMemoryObjectId;
+}
+
+void CHexGridCell::setTextureID(unsigned int textureID)
+{
+	this->textureID = textureID;
+}
+
+unsigned int CHexGridCell::getTextureID()
+{
+	return this->textureID;
 }
 
 void CHexGridCell::getVertices(float * v)

@@ -19,7 +19,11 @@
 #define FRAGMENT_SHADER_WIREFRAME      "SHADERS\\glsl_wireframe.frag"
 
 // TEXTURE FILENAMES
-#define MENU_TEXTURE_FILE              "TEXTURES\\Menu.tga"
-#define MENU_TEXTURE_FILE_EXAMEN_FINAL "TEXTURES\\MenuExamenFinal.tga"
+#define MENU_TEXTURE_FILE               "TEXTURES\\Menu.tga"
+#define MENU_TEXTURE_FILE_EXAMEN_FINAL  "TEXTURES\\MenuExamenFinal.tga"
+#define TEX_WORLD_1						"TEXTURES\\Grass_Texture.tga"
+#define TEX_WORLD_2						"TEXTURES\\Rock_Texture.tga"
+#define TEX_WORLD_3						"TEXTURES\\Water_Texture.tga"
+#define TEX_WORLD_4						"TEXTURES\\Wood_Texture.tga"
 
 #endif // !_GLOBALS_H

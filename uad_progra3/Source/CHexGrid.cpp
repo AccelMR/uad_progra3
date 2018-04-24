@@ -96,6 +96,11 @@ bool CHexGrid::Inicialize(COpenGLRenderer *openGLRenderer)
 		resourceFilenameVS.c_str(), 
 		resourceFilenameFS.c_str());
 
+	/*openGLRenderer->createShaderProgram(
+		&gridTextureProgramID,
+		resourceFilenameVS.c_str(),
+		resourceFilenameFS.c_str());*/
+
 	openGLRenderer->allocateGraphicsMemoryForObject(
 		&gridShaderProgramID,
 		&gridVAOID, verticesRaw,
@@ -126,4 +131,21 @@ int CHexGrid::getNumIndices()
 CVector3 CHexGrid::getCellPointInfo(int x, int y, int point)
 {
 	return m_hexLayout[x][y]->getPoint(point);
+}
+
+void CHexGrid::createTextureWorld(vector<unsigned int>* textureID)
+{
+	for (size_t i = 0; i < 100; i++) {
+		for (size_t j = 0; j < 100; j++) {
+			if (i > SIZE_OF_HEXGRID / 2 && j > SIZE_OF_HEXGRID / 2)
+				m_hexLayout[i][j]->setTextureID(textureID->at(0));
+			if (i > SIZE_OF_HEXGRID / 2 && j < SIZE_OF_HEXGRID / 2)
+				m_hexLayout[i][j]->setTextureID(textureID->at(1));
+			if (i < SIZE_OF_HEXGRID / 2 && j > SIZE_OF_HEXGRID / 2)
+				m_hexLayout[i][j]->setTextureID(textureID->at(2));
+			if (i < SIZE_OF_HEXGRID / 2 && j < SIZE_OF_HEXGRID / 2)
+				m_hexLayout[i][j]->setTextureID(textureID->at(3));
+		}
+		
+	}
 }

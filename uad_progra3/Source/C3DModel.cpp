@@ -7,13 +7,13 @@
 #include <string.h>
 #include <vector>
 #include <wchar.h>
-#include "..\C3DModel_Obj.h"
 
 using namespace std;
 
 #include "../Include/C3DModel.h"
 #include "../Include/C3DModel_STL.h"
 #include "../Include/CLogger.h"
+#include "../Include/C3DModel_Obj.h"
 
 /* */
 C3DModel::C3DModel()

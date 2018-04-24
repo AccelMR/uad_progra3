@@ -6,17 +6,20 @@ class CQuadTreeNode
 {
 private:
 
-	CQuadTreeNode *root;
-	CQuadTreeNode *fChild;
-	CQuadTreeNode *sChild;
-	CQuadTreeNode *tChild;
-	CQuadTreeNode *frthChild;
+	CQuadTreeNode *topLeftChild;
+	CQuadTreeNode *topRightChild;
+	CQuadTreeNode *botLeftChild;
+	CQuadTreeNode *botRightChild;
 
-	CVector3 data[18];
+	CVector3 data;
+	//CVector3 verticesNode;
+	CVector3 centerLeaf;
 
 public:
 
-	CQuadTreeNode();
+	CQuadTreeNode(CVector3* verticesNode, CHexGrid* myHex);
 	~CQuadTreeNode();
+
+	void Subdivide(CHexGrid* myHex);
 };
 

@@ -8,7 +8,7 @@
 #include "..\Include\COpenGLRenderer.h"
 #include "..\Include\Globals.h"
 
-#define SIZE_OF_HEXGRID 3
+#define SIZE_OF_HEXGRID 100
 
 
 class CHexGrid
@@ -25,6 +25,8 @@ public:
 
 	CVector3 getCellPointInfo(int x, int y, int point);
 
+	void createTextureWorld(std::vector<unsigned int>* textureID);
+
 private:
 
 	// Size of each side of hexagon
@@ -38,6 +40,9 @@ private:
 
 	unsigned int gridShaderProgramID;
 	unsigned int gridVAOID;
+
+	unsigned int gridTextureProgramID;
+	unsigned int gridVAOIDTexture;
 
 protected:
 
