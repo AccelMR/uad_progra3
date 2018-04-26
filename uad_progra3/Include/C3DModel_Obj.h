@@ -1,22 +1,31 @@
 #pragma once
-#include "..\Include\C3DModel.h"
 
-class C3DModel_Obj :
-	public C3DModel
+#ifndef C3DMODEL_H_OBJ
+#define C3DMODEL_H_OBJ
+
+#include <string>
+using namespace std;
+
+#include "C3DModel.h"
+
+class C3DModel_Obj : public C3DModel
 {
 private:
+	int m_currentVertex, m_currentNormal, m_currentUV, m_currentFace; // Aux counters used when loading an object from file
 
-	CVector3 *m_vertices;                               // Dynamically-allocated array of vertices
-	CVector3 *m_normals;                               // Dynamically-allocated array of normals
-	CVector3 *m_UVCoords;                             // Dynamically-allocated array of UV coords
+	bool readObjFile(const char * const filename, bool countOnly);    // Read object from file 
+	bool parseObjLine(												  // Parse line
+		std::string line,
+		bool countOnly,
+		int lineNumber);
 
-	void reset();
+protected:
+	void reset();                                                     // Cleanup any allocated memory
+	bool loadFromFile(const char * const filename);
 
 public:
 	C3DModel_Obj();
 	~C3DModel_Obj();
-
-	bool loadFromFile (const char * const filename);
-	bool parseLine(std::string line, bool countOnly, int lineNumber);
-	bool readFile(const char * const filename, bool countOnly);
 };
+
+#endif // !C3DMODEL_H_OBJ

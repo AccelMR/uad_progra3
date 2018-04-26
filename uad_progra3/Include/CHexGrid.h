@@ -21,9 +21,14 @@ public:
 
 	unsigned int* getShaderProgramId();
 	unsigned int* getVAOID();
+
+	unsigned int* getShaderProgramIdTexture();
+	unsigned int* getVAOIDTexture();
+
 	int getNumIndices();
 
 	CVector3 getCellPointInfo(int x, int y, int point);
+	CVector3 getCenter(int i, int j);
 
 	void createTextureWorld(std::vector<unsigned int>* textureID);
 
@@ -31,7 +36,7 @@ private:
 
 	// Size of each side of hexagon
 	// At the same time, it is the size from center to any vertex.
-	const float sizeOfSide = 1.0f;
+	const float sizeOfSide = 0.5f;
 
 	// Size of line that goes from the center to the top/bottom edge
 	float a;

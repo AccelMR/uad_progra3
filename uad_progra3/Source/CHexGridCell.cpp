@@ -14,6 +14,7 @@ CHexGridCell::CHexGridCell(float x, float y, const float size, float a) :
 	vertex[4].setValues(x -  size,			0,		y		);		// P4
 	vertex[5].setValues(x - (size / 2.0f),	0,      y - a	);		// P5
 	
+	
 }
 
 CHexGridCell::~CHexGridCell()

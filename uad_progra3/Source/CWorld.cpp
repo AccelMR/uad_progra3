@@ -9,6 +9,7 @@ CWorld::CWorld(COpenGLRenderer *openGLRenderer) :
 {
 	m_TextureNames.resize(4);
 	m_TextureNames = { TEX_WORLD_1,TEX_WORLD_2,TEX_WORLD_3,TEX_WORLD_4 };
+	m_TexturesID = { 0,0,0,0 };
 }
 
 
@@ -23,22 +24,20 @@ bool CWorld::Initialize()
 		initialized = true;
 	}
 
-	std::wstring wresourceFilenameVS;
-	std::string resourceFilenameVS;
-	TGAFILE tgaFile;
-	tgaFile.imageData = NULL;
-
-	for (size_t i = 0; i < 4; i++)
+	std::wstring wresourceFiletexture;
+	std::string resourceFileTexture;
+	// If resource files cannot be found, return
+	if (!CWideStringHelper::GetResourceFullPath(TEX_WORLD_1, wresourceFiletexture, resourceFileTexture))
 	{
-		// If resource files cannot be found, return
-		if (!CWideStringHelper::GetResourceFullPath(m_TextureNames[i].c_str(), wresourceFilenameVS, resourceFilenameVS))
-		{
-			Log << "ERROR: Unable to find one or more resource textures: " << endl;
-			Log << "  " << VERTEX_SHADER_WIREFRAME << endl;
-			Log << "  " << FRAGMENT_SHADER_WIREFRAME << endl;
-		}
+		Log << "ERROR: Unable to find one or more resource textures: " << endl;
+	}
 
-		if (LoadTGAFile(m_TextureNames[i].c_str(), &tgaFile))
+//	for (size_t i = 0; i < 4; i++)
+	//{
+		TGAFILE tgaFile;
+		tgaFile.imageData = NULL;
+		unsigned int aiuda = -1;
+		if (LoadTGAFile(resourceFileTexture.c_str(), &tgaFile))
 		{
 			if (tgaFile.imageData == NULL ||
 				tgaFile.imageHeight < 0 ||
@@ -53,7 +52,7 @@ bool CWorld::Initialize()
 
 			// Create a texture object for the menu, and copy the texture data to graphics memory
 			if (!OpenGLRenderer->createTextureObject(
-				&m_TexturesID[i],
+				&aiuda,
 				tgaFile.imageData,
 				tgaFile.imageWidth,
 				tgaFile.imageHeight
@@ -78,10 +77,10 @@ bool CWorld::Initialize()
 
 			return false;
 		}
+		OpenGLRenderer->initializeMCCube(aiuda);
+	//}
 
-	}
-
-	myHexGrid->createTextureWorld(&m_TexturesID);
+	//myHexGrid->createTextureWorld(&m_TexturesID);
 
 	return initialized;
 }
@@ -89,8 +88,19 @@ bool CWorld::Initialize()
 void CWorld::render(CVector3 CamPosition)
 {
 	float color[3] = { 0.95f, 0.95f, 0.95f };
-	MathHelper::Matrix4 modelMatrix = MathHelper::ModelMatrix((float)0, CamPosition);
+	for (size_t i = 0; i < SIZE_OF_HEXGRID; i++)
+	{
+		for (size_t j = 0; j < SIZE_OF_HEXGRID; j++)
+		{
+			MathHelper::Matrix4 modelMatrix = MathHelper::ModelMatrix((float)0, CamPosition + myHexGrid->getCenter(i, j));
 
+			OpenGLRenderer->renderMCCube(
+			&modelMatrix
+			);
+		}
+	}
+
+	MathHelper::Matrix4 modelMatrix = MathHelper::ModelMatrix((float)0, CamPosition);
 	OpenGLRenderer->renderWireframeObject(
 		myHexGrid->getShaderProgramId(),
 		myHexGrid->getVAOID(),
@@ -98,6 +108,7 @@ void CWorld::render(CVector3 CamPosition)
 		color,
 		&modelMatrix
 	);
+
 }
 
 bool CWorld::isInitialized()

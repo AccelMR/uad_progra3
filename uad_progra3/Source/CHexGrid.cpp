@@ -27,16 +27,16 @@ bool CHexGrid::Inicialize(COpenGLRenderer *openGLRenderer)
 
 	// Pos of first hexagon, calculates size of center
 	float x = 0, y = 0;
-	if (SIZE_OF_HEXGRID % 2 == 0) {
-		int hexDiv = SIZE_OF_HEXGRID / 2;
-		x = -1*((sizeOfSide * 2 * hexDiv) + (hexDiv*sizeOfSide)) / 2;
-		y = x;
-	}
-	else {
-		int hexDiv = SIZE_OF_HEXGRID / 2;
-		x = -1 * (((hexDiv + 1) * 2 * sizeOfSide) + (hexDiv*sizeOfSide)) / 2;
-		y = x;
-	}
+	//if (SIZE_OF_HEXGRID % 2 == 0) {
+	//	int hexDiv = SIZE_OF_HEXGRID / 2;
+	//	x = -1*((sizeOfSide * 2 * hexDiv) + (hexDiv*sizeOfSide)) / 2;
+	//	y = x;
+	//}
+	//else {
+	//	int hexDiv = SIZE_OF_HEXGRID / 2;
+	//	x = -1 * (((hexDiv + 1) * 2 * sizeOfSide) + (hexDiv*sizeOfSide)) / 2;
+	//	y = x;
+	//}
 
 	// HexLayout, if center is even then it adds 1/2 to X(i) else (odd) it adds 1/2 to X(i) and 1 to Y(j)
 	// Then it creates the VerticesRaw array. It has XYZ of each vertex
@@ -91,21 +91,37 @@ bool CHexGrid::Inicialize(COpenGLRenderer *openGLRenderer)
 		return false;
 	}
 
+	//std::wstring wresourceFilenameVS2;
+	//std::wstring wresourceFilenameFS2;
+	//std::string resourceFilenameVS2;
+	//std::string resourceFilenameFS2;
+	//
+	//// If resource files cannot be found, return
+	//if (!CWideStringHelper::GetResourceFullPath(VERTEX_SHADER_WIREFRAME, wresourceFilenameVS2, resourceFilenameVS2) ||
+	//	!CWideStringHelper::GetResourceFullPath(FRAGMENT_SHADER_WIREFRAME, wresourceFilenameFS2, resourceFilenameFS2))
+	//{
+	//	Log << "ERROR: Unable to find one or more resources: " << endl;
+	//	Log << "  " << VERTEX_SHADER_TEXTURED_3D_OBJECT << endl;
+	//	Log << "  " << FRAGMENT_SHADER_TEXTURED_3D_OBJECT << endl;
+	//	return false;
+	//}
+
 	openGLRenderer->createShaderProgram(
 		&gridShaderProgramID, 
-		resourceFilenameVS.c_str(), 
-		resourceFilenameFS.c_str());
-
-	/*openGLRenderer->createShaderProgram(
-		&gridTextureProgramID,
 		resourceFilenameVS.c_str(),
-		resourceFilenameFS.c_str());*/
+		resourceFilenameFS.c_str());
 
 	openGLRenderer->allocateGraphicsMemoryForObject(
 		&gridShaderProgramID,
 		&gridVAOID, verticesRaw,
 		SIZE_OF_HEXGRID * SIZE_OF_HEXGRID * 6,
 		indices, getNumIndices());
+	
+	//openGLRenderer->allocateGraphicsMemoryForObject(
+	//	&gridVAOIDTexture,
+	//	&gridVAOID, verticesRaw,
+	//	SIZE_OF_HEXGRID * SIZE_OF_HEXGRID * 6,
+	//	indices, getNumIndices());
 
 	delete[] verticesRaw;
 	delete[] indices;
@@ -123,6 +139,16 @@ unsigned int * CHexGrid::getVAOID()
 	return &gridVAOID;
 }
 
+unsigned int * CHexGrid::getShaderProgramIdTexture()
+{
+	return &gridTextureProgramID;
+}
+
+unsigned int * CHexGrid::getVAOIDTexture()
+{
+	return &gridVAOIDTexture;
+}
+
 int CHexGrid::getNumIndices()
 {
 	return 4 * SIZE_OF_HEXGRID * SIZE_OF_HEXGRID;
@@ -131,6 +157,11 @@ int CHexGrid::getNumIndices()
 CVector3 CHexGrid::getCellPointInfo(int x, int y, int point)
 {
 	return m_hexLayout[x][y]->getPoint(point);
+}
+
+CVector3 CHexGrid::getCenter(int i, int j)
+{
+	return m_hexLayout[i][j]->getCenter();
 }
 
 void CHexGrid::createTextureWorld(vector<unsigned int>* textureID)

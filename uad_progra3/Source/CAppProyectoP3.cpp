@@ -144,31 +144,32 @@ void CAppProyectoP3::run()
 			// Initialize a test cube
 			getOpenGLRenderer()->initializeTestObjects();
 
-			hEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
-			hEvent2 = CreateEvent(NULL, FALSE, FALSE, NULL);
-			thread1 = CreateThread(
-				nullptr,
-				0,
-				(LPTHREAD_START_ROUTINE)InitilizeWorld,
-				this,
-				0,
-				&threadID_1);
-
-			thread2 = CreateThread(
-				nullptr,
-				0,
-				(LPTHREAD_START_ROUTINE)CreateDefaultWorld,
-				this,
-				0,
-				&threadID_2);
-
-			thread3 = CreateThread(
-				nullptr,
-				0,
-				(LPTHREAD_START_ROUTINE)InitilizeQuadTree,
-				this,
-				0,
-				&threadID_3);
+			myWorld->Initialize();
+			//hEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
+			//hEvent2 = CreateEvent(NULL, FALSE, FALSE, NULL);
+			//thread1 = CreateThread(
+			//	nullptr,
+			//	0,
+			//	(LPTHREAD_START_ROUTINE)InitilizeWorld,
+			//	this,
+			//	0,
+			//	&threadID_1);
+			//
+			//thread2 = CreateThread(
+			//	nullptr,
+			//	0,
+			//	(LPTHREAD_START_ROUTINE)CreateDefaultWorld,
+			//	this,
+			//	0,
+			//	&threadID_2);
+			//
+			//thread3 = CreateThread(
+			//	nullptr,
+			//	0,
+			//	(LPTHREAD_START_ROUTINE)InitilizeQuadTree,
+			//	this,
+			//	0,
+			//	&threadID_3);
 
 			// Enter main loop
 			Log << "Entering Main loop" << endl;
