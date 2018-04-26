@@ -24,16 +24,16 @@ bool CWorld::Initialize()
 		initialized = true;
 	}
 
-	std::wstring wresourceFiletexture;
-	std::string resourceFileTexture;
-	// If resource files cannot be found, return
-	if (!CWideStringHelper::GetResourceFullPath(TEX_WORLD_1, wresourceFiletexture, resourceFileTexture))
-	{
-		Log << "ERROR: Unable to find one or more resource textures: " << endl;
-	}
 
-//	for (size_t i = 0; i < 4; i++)
-	//{
+	for (size_t i = 0; i < 4; i++)
+	{
+		std::wstring wresourceFiletexture;
+		std::string resourceFileTexture;
+		// If resource files cannot be found, return
+		if (!CWideStringHelper::GetResourceFullPath(m_TextureNames[i].c_str(), wresourceFiletexture, resourceFileTexture))
+		{
+			Log << "ERROR: Unable to find one or more resource textures: " << endl;
+		}
 		TGAFILE tgaFile;
 		tgaFile.imageData = NULL;
 		unsigned int aiuda = -1;
@@ -52,7 +52,7 @@ bool CWorld::Initialize()
 
 			// Create a texture object for the menu, and copy the texture data to graphics memory
 			if (!OpenGLRenderer->createTextureObject(
-				&aiuda,
+				&m_TexturesID[i],
 				tgaFile.imageData,
 				tgaFile.imageWidth,
 				tgaFile.imageHeight
@@ -78,7 +78,7 @@ bool CWorld::Initialize()
 			return false;
 		}
 		OpenGLRenderer->initializeMCCube(aiuda);
-	//}
+	}
 
 	//myHexGrid->createTextureWorld(&m_TexturesID);
 
@@ -92,7 +92,12 @@ void CWorld::render(CVector3 CamPosition)
 	{
 		for (size_t j = 0; j < SIZE_OF_HEXGRID; j++)
 		{
-			MathHelper::Matrix4 modelMatrix = MathHelper::ModelMatrix((float)0, CamPosition + myHexGrid->getCenter(i, j));
+
+			float x, y, z;
+			x = myHexGrid->getCenter(i, j).getX() + CamPosition.getX();
+			y = myHexGrid->getCenter(i, j).getY() + CamPosition.getY();
+			z = myHexGrid->getCenter(i, j).getZ() + CamPosition.getZ();
+			MathHelper::Matrix4 modelMatrix = MathHelper::ModelMatrix((float)0, CVector3(x,y,z));
 
 			OpenGLRenderer->renderMCCube(
 			&modelMatrix
@@ -100,14 +105,14 @@ void CWorld::render(CVector3 CamPosition)
 		}
 	}
 
-	MathHelper::Matrix4 modelMatrix = MathHelper::ModelMatrix((float)0, CamPosition);
-	OpenGLRenderer->renderWireframeObject(
-		myHexGrid->getShaderProgramId(),
-		myHexGrid->getVAOID(),
-		myHexGrid->getNumIndices(),
-		color,
-		&modelMatrix
-	);
+	//MathHelper::Matrix4 modelMatrix = MathHelper::ModelMatrix((float)0, CamPosition);
+	//OpenGLRenderer->renderWireframeObject(
+	//	myHexGrid->getShaderProgramId(),
+	//	myHexGrid->getVAOID(),
+	//	myHexGrid->getNumIndices(),
+	//	color,
+	//	&modelMatrix
+	//);
 
 }
 
