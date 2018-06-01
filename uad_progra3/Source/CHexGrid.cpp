@@ -27,16 +27,16 @@ bool CHexGrid::Inicialize(COpenGLRenderer *openGLRenderer)
 
 	// Pos of first hexagon, calculates size of center
 	float x = 0, y = 0;
-	//if (SIZE_OF_HEXGRID % 2 == 0) {
-	//	int hexDiv = SIZE_OF_HEXGRID / 2;
-	//	x = -1*((sizeOfSide * 2 * hexDiv) + (hexDiv*sizeOfSide)) / 2;
-	//	y = x;
-	//}
-	//else {
-	//	int hexDiv = SIZE_OF_HEXGRID / 2;
-	//	x = -1 * (((hexDiv + 1) * 2 * sizeOfSide) + (hexDiv*sizeOfSide)) / 2;
-	//	y = x;
-	//}
+	if (SIZE_OF_HEXGRID % 2 == 0) {
+		int hexDiv = SIZE_OF_HEXGRID / 2;
+		x = -1*((sizeOfSide * 2 * hexDiv) + (hexDiv*sizeOfSide)) / 2;
+		y = x;
+	}
+	else {
+		int hexDiv = SIZE_OF_HEXGRID / 2;
+		x = -1 * (((hexDiv + 1) * 2 * sizeOfSide) + (hexDiv*sizeOfSide)) / 2;
+		y = x;
+	}
 
 	// HexLayout, if center is even then it adds 1/2 to X(i) else (odd) it adds 1/2 to X(i) and 1 to Y(j)
 	// Then it creates the VerticesRaw array. It has XYZ of each vertex

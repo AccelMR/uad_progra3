@@ -25,12 +25,12 @@ bool CWorld::Initialize()
 	}
 
 
-	for (size_t i = 0; i < 4; i++)
-	{
+	//for (size_t i = 0; i < 4; i++)
+	//{
 		std::wstring wresourceFiletexture;
 		std::string resourceFileTexture;
 		// If resource files cannot be found, return
-		if (!CWideStringHelper::GetResourceFullPath(m_TextureNames[i].c_str(), wresourceFiletexture, resourceFileTexture))
+		if (!CWideStringHelper::GetResourceFullPath(TEX_WORLD_1, wresourceFiletexture, resourceFileTexture))
 		{
 			Log << "ERROR: Unable to find one or more resource textures: " << endl;
 		}
@@ -52,7 +52,7 @@ bool CWorld::Initialize()
 
 			// Create a texture object for the menu, and copy the texture data to graphics memory
 			if (!OpenGLRenderer->createTextureObject(
-				&m_TexturesID[i],
+				&aiuda,
 				tgaFile.imageData,
 				tgaFile.imageWidth,
 				tgaFile.imageHeight
@@ -78,7 +78,7 @@ bool CWorld::Initialize()
 			return false;
 		}
 		OpenGLRenderer->initializeMCCube(aiuda);
-	}
+	//}
 
 	//myHexGrid->createTextureWorld(&m_TexturesID);
 
